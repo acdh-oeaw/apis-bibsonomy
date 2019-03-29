@@ -10,5 +10,5 @@ class Reference(models.Model):
     bibtex = models.TextField(blank=True, null=True)
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
-    attribute = models.CharField(blank=True, null=True)
+    attribute = models.CharField(blank=True, null=True, max_length=255)
     last_update = models.DateTimeField(auto_now=True)

@@ -6,6 +6,7 @@ import re
 
 from .utils import BibsonomyEntry
 from .models import Reference
+from .forms import ReferenceForm
 
 
 class SaveBibsonomyEntry(APIView):
@@ -41,3 +42,11 @@ class SaveBibsonomyEntry(APIView):
         ref = Reference.objects.create(**r)
         m = {'status': 'success', 'ref_id': ref.pk}
         return Response(data=json.dumps(m), status=status.HTTP_201_CREATED)
+
+    def get(self, request, entity_id=None):
+        if entity_id is None:
+            form = ReferenceForm()
+        else:
+            d = Reference.objects.get(pk=entity_id)
+            form = ReferenceForm(**d)
+        return Response(data=form.as_p())
