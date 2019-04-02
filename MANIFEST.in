@@ -1,0 +1,4 @@
+include LICENSE
+include README.rst
+recursive-include apis_bibsonomy/static/apis_bibsonomy *
+recursive-include apis_bibsonomy/templates/apis_bibsonomy *
