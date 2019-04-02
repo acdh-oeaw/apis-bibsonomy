@@ -30,7 +30,7 @@ class BibsonomyAutocomplete(autocomplete.Select2ListView):
             if 'post' in res['posts'].keys():
                 for r in res['posts']['post']:
                     ent = BibsonomyEntry(bib_entry={'post': r})
-                    choices.append({'id': ent.bib_hash, 'text': ent.html})
+                    choices.append({'id': ent.bib_hash, 'text': ent.autocomplete})
         if more:
             more = True
         return http.HttpResponse(json.dumps({

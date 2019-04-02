@@ -1,0 +1,11 @@
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+{% if hidden %}
+<div id="tooltipster-bibs-template" style="display: none">
+{% crispy form form.helper %}
+</div>
+{% else %}
+{% crispy form form.helper %}
+{% endif %}

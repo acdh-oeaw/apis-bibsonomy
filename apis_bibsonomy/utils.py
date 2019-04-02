@@ -9,7 +9,7 @@ class BibsonomyEntry:
 
     def __init__(self, bib_hash=None, bib_entry=None, entry_attrib=None):
         if entry_attrib is None:
-            self._entry_attrib = ['authors', 'title', 'year', 'volume', 'test']
+            self._entry_attrib = ['authors', 'title', 'year', 'volume']
         if bib_hash is not None:
             headers = {'accept': 'application/json'}
             base_set = getattr(settings, "APIS_BIBSONOMY", None)
@@ -46,5 +46,8 @@ class BibsonomyEntry:
         else:
             table = None
         return table
-
+    def get_autocomplete(self):
+        res_str = "{} ({}): {}".format(self.authors, self.year, self.title)
+        return res_str
     html = property(get_html)
+    autocomplete = property(get_autocomplete)

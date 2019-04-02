@@ -2,6 +2,7 @@ APIS Bibsonomy
 ==============
 
 APIS Bibsonomy is a small addon to the APIS system. It allows to store references in Bibsonomy instances and use these references in APIS.
+It is very generic and should work with most Django installations/projects.
 
 Installation
 ------------
@@ -16,6 +17,10 @@ Installation
   ...
   'apis_bibsonomy'
   ]
+
+- And migrate your DB:::
+
+  python manage.py migrate
 
 Configuration
 -------------
@@ -32,3 +37,24 @@ APIS_BIBSONOMY = {
 }
 
 Restart your server and you are good to go.
+
+
+Usage
+-----
+
+- Include the base template somewhere in the header of your template:::
+
+{% include 'apis_bibsonomy/apis_bibsonomy_include.html' %}
+
+- Load the templatetag:::
+
+{% load bibsonomy_templatetags %}
+
+- Include the form somewhere in your template (set hidden=True if you intend to use buttons):::
+
+{% bibsonomy_form content_type='person' hidden=True %}
+
+- And finally add html tags as anker element for the reference forms to your template (dont forget to set "bibsonomy-anker" as class):::
+
+<button class="bibsonomy-anker" data-bibs-contenttype="person" data-bibs-object_pk={{instance.pk}} data-bibs-attribute="Attribute name (optional)">Ref</button>
+
