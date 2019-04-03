@@ -32,7 +32,7 @@ class BibsonomyEntry:
         self.year = jmespath.search('post.bibtex.year', art)
         self.volume = jmespath.search('post.bibtex.volume', art)
         self.bib_hash = jmespath.search('post.bibtex.href', art)
-        self.bibtex = json.dumps(jmespath.search('post.bibtex', art))
+        self.bibtex = jmespath.search('post.bibtex', art)
 
     def get_html(self, include_table=False):
         rows = ''

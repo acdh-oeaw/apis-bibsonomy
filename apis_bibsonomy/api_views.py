@@ -43,7 +43,7 @@ class SaveBibsonomyEntry(APIView):
                     r['pages_start'] = mtch.group(1)
                 if mtch.group(2):
                     r['pages_end'] = mtch.group(2)
-        r['bibtex'] = bib_e.bibtex.replace('\\', '')
+        r['bibtex'] = json.dumps(bib_e.bibtex)
         ref = Reference.objects.create(**r)
         m = {'message': 'Saved', 'ref_id': ref.pk}
         return Response(data=m, status=status.HTTP_201_CREATED)
