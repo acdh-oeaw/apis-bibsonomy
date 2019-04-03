@@ -1,4 +1,5 @@
 import os
+import re
 from setuptools import find_packages, setup
 
 with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
@@ -8,9 +9,22 @@ with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 
+def get_version(*file_paths):
+    """Retrieves the version from apis_core/__init__.py"""
+    filename = os.path.join(os.path.dirname(__file__), *file_paths)
+    version_file = open(filename).read()
+    version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]", version_file, re.M)
+    if version_match:
+        return version_match.group(1)
+    raise RuntimeError("Unable to find version string.")
+
+
+version = get_version("apis_bibsonomy", "__init__.py")
+
+
 setup(
     name='apis-bibsonomy',
-    version='0.2',
+    version=version,
     packages=find_packages(),
     include_package_data=True,
     license='MIT License',  # example license

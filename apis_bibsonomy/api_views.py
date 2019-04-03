@@ -13,23 +13,27 @@ from .forms import ReferenceForm
 class SaveBibsonomyEntry(APIView):
 
     def post(self, request, format=None):
-        bib_ref = request.data['bibs_url']
+        bib_ref = request.data.get('bibs_url', None)
         obj_id = request.data.get('object_id', None)
         entity_type = request.data.get('content_type', None)
         field_name = request.data.get('attribute', None)
         page_range = request.data.get('page_range', None)
-        bib_e = BibsonomyEntry(bib_hash=bib_ref)
-        r = {'bibs_url': bib_ref}
+        if bib_ref is not None:
+            bib_e = BibsonomyEntry(bib_hash=bib_ref)
+            r = {'bibs_url': bib_ref}
+        else:
+            m = {'message': 'You need to select a publication.'}
+            return Response(data=m, status=status.HTTP_400_BAD_REQUEST)
         if obj_id is not None:
             r['object_id'] = obj_id
         else:
             m = {'message': 'You need to specify the object id'}
-            return Response(data=json.dumps(m), status=status.HTTP_400_BAD_REQUEST)
+            return Response(data=m, status=status.HTTP_400_BAD_REQUEST)
         if entity_type is not None:
             r['content_type'] = ContentType.objects.get(model=entity_type)
         else:
             m = {'message': 'You need to specify the content type of the object'}
-            return Response(data=json.dumps(m), status=status.HTTP_400_BAD_REQUEST)
+            return Response(data=m, status=status.HTTP_400_BAD_REQUEST)
         if field_name is not None:
             r['attribute'] = field_name
         if page_range is not None:
@@ -41,8 +45,8 @@ class SaveBibsonomyEntry(APIView):
                     r['pages_end'] = mtch.group(2)
         r['bibtex'] = bib_e.bibtex.replace('\\', '')
         ref = Reference.objects.create(**r)
-        m = {'status': 'success', 'ref_id': ref.pk}
-        return Response(data=json.dumps(m), status=status.HTTP_201_CREATED)
+        m = {'message': 'Saved', 'ref_id': ref.pk}
+        return Response(data=m, status=status.HTTP_201_CREATED)
 
     def get(self, request):
         ct = request.query_params.get('contenttype', None)
