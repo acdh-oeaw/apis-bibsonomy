@@ -1,4 +1,6 @@
 div.tooltipster-content span.select2-container {
 	z-index: 1000;
 }
-
+a.bibsonomy-anker {
+	cursor: pointer;
+}
