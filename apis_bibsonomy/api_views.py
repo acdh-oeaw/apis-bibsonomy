@@ -1,3 +1,4 @@
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
 import json
@@ -11,6 +12,8 @@ from .forms import ReferenceForm
 
 
 class SaveBibsonomyEntry(APIView):
+
+    permission_classes = [IsAuthenticated]
 
     def post(self, request, format=None):
         bib_ref = request.data.get('bibs_url', None)

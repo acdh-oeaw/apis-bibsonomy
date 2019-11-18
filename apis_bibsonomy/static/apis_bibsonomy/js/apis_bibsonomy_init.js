@@ -1,4 +1,29 @@
 $( document ).ready(function() {
+	$(".bibsonomy-anker-hidden").each(function(){
+		var form_data = $(this).data('bibs-form-elements')
+		var entity_type = $(this).data('')
+		if (form_data) {
+			form_data = form_data.split("|")
+			var obj_pk = $(this).data('bibs-object_pk')
+			var f = $(this).parents('form')
+			form_data.forEach(function(item){
+  				var el = document.getElementById('div_id_'+item);
+  				if (el !== null) {
+					var node = document.createElement("a");
+					node.setAttribute("class", "bibsonomy-anker")
+					node.setAttribute("data-bibs-contenttype", "person")
+					node.setAttribute('data-bibs-object_pk', obj_pk)
+					node.setAttribute('data-bibs-attribute', item)
+					node2 = document.createElement('i');
+					node2.setAttribute('data-feather', "book-open")
+					node2.setAttribute('style', 'margin-bottom: .5rem')
+					node.append(node2)
+					el.prepend(node)
+				}
+			});
+			feather.replace()
+		}
+	});
 	$(".bibsonomy-anker").tooltipster({
 		contentCloning: true,
 		interactive: true,
@@ -51,6 +76,11 @@ $( document ).ready(function() {
 		}
 })
 });
+
+$(document).on('submit', 'button.bibsonomy-anker', function(event){
+	event.preventDefault();
+	event.stopPropagation();
+})
 
 $(document).on('submit', 'form.bibs-forms', function(event){
 	event.preventDefault();
