@@ -1,7 +1,7 @@
 $( document ).ready(function() {
 	$(".bibsonomy-anker-hidden").each(function(){
 		var form_data = $(this).data('bibs-form-elements')
-		var entity_type = $(this).data('')
+		var entity_type = $(this).data('bibs-contenttype')
 		if (form_data) {
 			form_data = form_data.split("|")
 			var obj_pk = $(this).data('bibs-object_pk')
@@ -11,7 +11,7 @@ $( document ).ready(function() {
   				if (el !== null) {
 					var node = document.createElement("a");
 					node.setAttribute("class", "bibsonomy-anker")
-					node.setAttribute("data-bibs-contenttype", "person")
+					node.setAttribute("data-bibs-contenttype", entity_type)
 					node.setAttribute('data-bibs-object_pk', obj_pk)
 					node.setAttribute('data-bibs-attribute', item)
 					node2 = document.createElement('i');
