@@ -26,7 +26,8 @@ $( document ).ready(function() {
 	});
 	$(".bibsonomy-anker").tooltipster({
 		contentCloning: true,
-		interactive: true,
+		interactive: true
+		,
 		content: 'loading...',
 		contentAsHtml: true,
 		trigger: 'click',
@@ -44,7 +45,7 @@ $( document ).ready(function() {
 			$deepc.children('input#id_object_id').val($bib.bibsObject_pk)
 			$deepc.children('input#id_content_type').val($bib.bibsContenttype)
 			$deepc.children('input#id_attribute').val($bib.bibsAttribute)
-			$res = $('<div class="bibs-container"><table class="table"><thead><tr><td>authors</td><td>title</td><td>year</td></tr></thead><tbody></tbody></table></div>')
+			$res = $('<div class="bibs-container"><table class="table"><thead><tr><td>delete</td><td>authors</td><td>title</td><td>year</td></tr></thead><tbody></tbody></table></div>')
 			$res.append($deepc)
 			$res.append($('<div id="bibs-messages"></div>'))
 			instance.content($res)
@@ -69,8 +70,9 @@ $( document ).ready(function() {
 					$('div.bibs-container > table > tbody').html('');
 					$('div.bibs-container > div#bibs-messages').html('');
 					data.responseJSON.forEach(function(entry) {
-						$('div.bibs-container > table > tbody').append($('<tr><td>'+entry.author+'</td><td>'+entry.title+'</td><td>'+entry.year+'</td></tr>'))
+						$('div.bibs-container > table > tbody').append($('<tr id="bib-entry-'+entry.pk+'"><td><a href="#" data-bib-id="'+entry.pk+'" class="delete-bib-entry"><i data-feather="trash"></i></a></td><td>'+entry.author+'</td><td>'+entry.title+'</td><td>'+entry.year+'</td></tri>'))
 				});
+					feather.replace()
 				}
 			})
 		}
@@ -100,5 +102,27 @@ $(document).on('submit', 'form.bibs-forms', function(event){
 				form_object.parent().children('div#bibs-messages').append($('<div class="alert alert-primary" role="alert">'+response.responseJSON.message+'</div>'))
 			}
 	}
+	})
+})
+
+
+$(document).on('click', 'a.delete-bib-entry', function(event){
+	event.preventDefault();
+	event.stopPropagation();
+	var post_url = $('#bibs-form').attr("action");
+	var pk = $(this).data('bib-id')
+	$.ajax({
+		url: post_url,
+		type: 'delete',
+		data: {'pk': pk},
+		beforeSend: function(request) {
+			var csrftoken = getCookie('csrftoken');
+			request.setRequestHeader("X-CSRFToken", csrftoken);
+		},
+		complete: function (response) {
+			if (response.status == 204) {
+				$('#bib-entry-'+pk).remove()
+			}
+		}
 	})
 })

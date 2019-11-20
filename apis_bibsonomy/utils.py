@@ -7,12 +7,12 @@ import json
 
 class BibsonomyEntry:
 
-    def __init__(self, bib_hash=None, bib_entry=None, entry_attrib=None):
+
+    def __init__(self, bib_hash=None, bib_entry=None, entry_attrib=None, base_set=None):
         if entry_attrib is None:
             self._entry_attrib = ['authors', 'title', 'year', 'volume']
         if bib_hash is not None:
             headers = {'accept': 'application/json'}
-            base_set = getattr(settings, "APIS_BIBSONOMY", None)
             if base_set is None:
                 raise ValueError("You need to specify your APIS_BIBSONOMY settings.")
             self._user = base_set['user']
@@ -38,7 +38,7 @@ class BibsonomyEntry:
         rows = ''
         for e in self._entry_attrib:
             if getattr(self, e, False):
-                rows += '<tr><th scope="row">{}</th>\n<td>{}</td></tr>\n'.format(e, getattr(self, e))
+                rows += '<tr><th scope="row">{}</th>\n<td>{}</td></tr>\n'.format(e, self._get_str(getattr(self, e)))
         if len(rows) > 1 and include_table:
             table = '<table class="table">\n<tbody>{}</tbody>\n</table>'.format(rows)
         elif not include_table:
