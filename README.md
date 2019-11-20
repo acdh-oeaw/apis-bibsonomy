@@ -53,11 +53,11 @@ Restart your server and you are good to go.
 
 `{% load bibsonomy_templatetags %}`
 
-- Include the form somewhere in your template (set hidden=True if you intend to use buttons):::
+- Include the form somewhere in your template (set hidden=True if you intend to use buttons):
 
 `{% bibsonomy_form content_type='person' hidden=True %}`
 
-- And finally add html tags as anker element for the reference forms to your template (dont forget to set "bibsonomy-anker" as class):::
+- And finally add html tags as anker element for the reference forms to your template (dont forget to set "bibsonomy-anker" as class):
 
 `<button class="bibsonomy-anker" data-bibs-contenttype="person" data-bibs-object_pk={{instance.pk}} data-bibs-attribute="Attribute name (optional)">Ref</button>`
 
