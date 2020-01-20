@@ -39,11 +39,19 @@ APIS_BIBSONOMY = [{
 }]
 ```
 
+If you want the plugin to add the reference buttons to certain fields you need to add these fields to the config:
+
+```
+APIS_BIBSONOMY_FIELDS = ['name', 'first_name', 'profession']
+```
+
+
 Restart your server and you are good to go.
 
 
 ## Usage
 
+*not needed if you are using standard templates*
 
 - Include the base template somewhere in the header of your template:
 
