@@ -3,25 +3,41 @@ $( document ).ready(function() {
 		var form_data = $(this).data('bibs-form-elements')
 		var entity_type = $(this).data('bibs-contenttype')
 		if (form_data) {
-			form_data = form_data.split("|")
-			var obj_pk = $(this).data('bibs-object_pk')
-			var f = $(this).parents('form')
-			form_data.forEach(function(item){
-  				var el = document.getElementById('div_id_'+item);
-  				if (el !== null) {
-					var node = document.createElement("a");
-					node.setAttribute("class", "bibsonomy-anker")
-					node.setAttribute("data-bibs-contenttype", entity_type)
-					node.setAttribute('data-bibs-object_pk', obj_pk)
-					node.setAttribute('data-bibs-attribute', item)
-					node2 = document.createElement('i');
-					node2.setAttribute('data-feather', "book-open")
-					node2.setAttribute('style', 'margin-bottom: .5rem')
-					node.append(node2)
-					el.prepend(node)
-				}
-			});
-			feather.replace()
+			if (form_data == "self"){
+				var obj_pk = $(this).data('bibs-object_pk')
+				var f = $(this).parents('form')
+						var node = document.createElement("a");
+						node.setAttribute("class", "bibsonomy-anker")
+						node.setAttribute("data-bibs-contenttype", entity_type)
+						node.setAttribute('data-bibs-object_pk', obj_pk)
+						node2 = document.createElement('i');
+						node2.setAttribute('data-feather', "book-open")
+						node2.setAttribute('style', 'margin-bottom: .5rem')
+						node.append(node2)
+						f.prepend(node)
+				feather.replace()
+			}
+			else {
+				form_data = form_data.split("|")
+				var obj_pk = $(this).data('bibs-object_pk')
+				var f = $(this).parents('form')
+				form_data.forEach(function (item) {
+					var el = document.getElementById('div_id_' + item);
+					if (el !== null) {
+						var node = document.createElement("a");
+						node.setAttribute("class", "bibsonomy-anker")
+						node.setAttribute("data-bibs-contenttype", entity_type)
+						node.setAttribute('data-bibs-object_pk', obj_pk)
+						node.setAttribute('data-bibs-attribute', item)
+						node2 = document.createElement('i');
+						node2.setAttribute('data-feather', "book-open")
+						node2.setAttribute('style', 'margin-bottom: .5rem')
+						node.append(node2)
+						el.prepend(node)
+					}
+				});
+				feather.replace()
+			}
 		}
 	});
 	$(".bibsonomy-anker").tooltipster({
@@ -36,7 +52,6 @@ $( document ).ready(function() {
 		maxHeight: 400,
 		zIndex: 900,
 		functionInit: function(instance, helper){
-			console.log(instance.content)
 			$('#bibs-form select.listselect2').select2('destroy')
 			$deepc = $('#bibs-form').clone(deepWithDataAndEvents=true)
 			$form_id = 'bibs-form_'+($('#bibs-form').length+1)
@@ -57,7 +72,6 @@ $( document ).ready(function() {
             // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
           }
         });
-			console.log(instance.content)
 		},
 		functionBefore: function(instance, helper) {	
 			$bib = helper.origin.dataset
@@ -66,7 +80,6 @@ $( document ).ready(function() {
 				type: 'get',
 				data: {'contenttype': $bib.bibsContenttype, 'object_pk': $bib.bibsObject_pk, 'attribute': $bib.bibsAttribute},
 				complete: function(data){
-					console.log(data)
 					$('div.bibs-container > table > tbody').html('');
 					$('div.bibs-container > div#bibs-messages').html('');
 					data.responseJSON.forEach(function(entry) {
