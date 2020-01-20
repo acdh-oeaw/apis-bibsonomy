@@ -14,7 +14,7 @@ $( document ).ready(function() {
 						node2.setAttribute('data-feather', "book-open")
 						node2.setAttribute('style', 'margin-bottom: .5rem')
 						node.append(node2)
-						f.prepend(node)
+						$('h1').prepend(node)
 				feather.replace()
 			}
 			else {
