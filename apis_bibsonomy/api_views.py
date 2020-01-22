@@ -95,6 +95,8 @@ class SaveBibsonomyEntry(APIView):
         qd = {'content_type': ct, 'object_id': ob_pk}
         if attrb is not None:
             qd['attribute'] = attrb
+        else:
+            qd['attribute'] = ""
         res = Reference.objects.filter(**qd)
         r2 = [json.loads(x) for x in res.values_list('bibtex', flat=True)]
         for idx2, res2 in enumerate(res):
