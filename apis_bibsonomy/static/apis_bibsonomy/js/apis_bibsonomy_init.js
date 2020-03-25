@@ -18,8 +18,10 @@ $( document ).ready(function() {
 						node.append(node2)
 						if (item != 'self') {
 							var el = document.getElementById('div_id_' + item);
-							node.setAttribute('data-bibs-attribute', item)
-							el.prepend(node)
+							if (el) {
+								node.setAttribute('data-bibs-attribute', item)
+								el.prepend(node)
+							}
 						} else {
 							$('h1').prepend(node)
 						}
