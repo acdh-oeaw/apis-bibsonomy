@@ -1,16 +1,16 @@
-import requests
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.views import APIView
-from rest_framework.response import Response
 import json
-from rest_framework import status
 import re
-from django.contrib.contenttypes.models import ContentType
-from django.conf import settings
 
-from .utils import BibsonomyEntry
+import requests
+from django.conf import settings
+from django.contrib.contenttypes.models import ContentType
+from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
 from .models import Reference
-from .forms import ReferenceForm
+from .utils import BibsonomyEntry
 
 
 class SaveBibsonomyEntry(APIView):
@@ -34,7 +34,8 @@ class SaveBibsonomyEntry(APIView):
         obj_id = request.data.get('object_id', None)
         entity_type = request.data.get('content_type', None)
         field_name = request.data.get('attribute', None)
-        page_range = request.data.get('page_range', None)
+        pages_start = request.data.get('pages_start', None)
+        pages_end = request.data.get('pages_end', None)
         kind = None
         sett = getattr(settings, 'APIS_BIBSONOMY', [])
         for s in sett:
@@ -69,13 +70,10 @@ class SaveBibsonomyEntry(APIView):
             return Response(data=m, status=status.HTTP_400_BAD_REQUEST)
         if field_name is not None:
             r['attribute'] = field_name
-        if page_range is not None:
-            mtch = re.match(r'^(\d)+\-?(\d+)?$', page_range)
-            if mtch:
-                if mtch.group(1):
-                    r['pages_start'] = mtch.group(1)
-                if mtch.group(2):
-                    r['pages_end'] = mtch.group(2)
+        if pages_start is not None and pages_start != '':
+            r['pages_start'] = pages_start
+        if pages_end is not None and pages_end != '':
+            r['pages_end'] = pages_end
         ref = Reference.objects.create(**r)
         m = {'message': 'Saved', 'ref_id': ref.pk}
         return Response(data=m, status=status.HTTP_201_CREATED)
