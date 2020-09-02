@@ -69,7 +69,8 @@ class SaveBibsonomyEntry(APIView):
             m = {'message': 'You need to specify the content type of the object'}
             return Response(data=m, status=status.HTTP_400_BAD_REQUEST)
         if field_name is not None:
-            r['attribute'] = field_name
+            if len(field_name) > 0:
+                r['attribute'] = field_name
         if pages_start is not None and pages_start != '':
             r['pages_start'] = pages_start
         if pages_end is not None and pages_end != '':
@@ -91,10 +92,14 @@ class SaveBibsonomyEntry(APIView):
             m = {'message': 'You need to specify the primary key of the object'}
             return Response(data=json.dumps(m), status=status.HTTP_400_BAD_REQUEST)
         qd = {'content_type': ct, 'object_id': ob_pk}
-        if attrb is not None:
+        if attrb is not None and (attrb == "*" or attrb == "all" or attrb == ""):
+            qd['attribute__isnull'] = False
+        elif attrb is not None and attrb == 'include':
+            pass
+        elif attrb is not None:
             qd['attribute'] = attrb
         else:
-            qd['attribute'] = ""
+            qd['attribute__isnull'] = True
         res = Reference.objects.filter(**qd)
         r2 = [json.loads(x) for x in res.values_list('bibtex', flat=True)]
         for idx2, res2 in enumerate(res):
