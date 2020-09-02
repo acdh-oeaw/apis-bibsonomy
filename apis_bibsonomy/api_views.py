@@ -15,8 +15,6 @@ from .utils import BibsonomyEntry
 
 class SaveBibsonomyEntry(APIView):
 
-    permission_classes = [IsAuthenticated]
-
     @staticmethod
     def _get_str(entry, key):
         if not isinstance(entry, str) and key == 'author':
