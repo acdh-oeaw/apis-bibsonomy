@@ -102,6 +102,14 @@ class SaveBibsonomyEntry(APIView):
         r2 = [json.loads(x) for x in res.values_list('bibtex', flat=True)]
         for idx2, res2 in enumerate(res):
             r2[idx2]['pk'] = res2.pk
+            if res2.pages_start is None:
+                r2[idx2]['pages_start'] = ""
+            else:
+                r2[idx2]['pages_start'] = res2.pages_start
+            if res2.pages_end is None:
+                r2[idx2]['pages_end'] = ""
+            else:
+                r2[idx2]['pages_end'] = res2.pages_end
         for idx1, v1 in enumerate(r2):
             pre = dict()
             for k, v in v1.items():
