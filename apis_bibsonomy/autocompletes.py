@@ -21,6 +21,9 @@ def query_bibsonomy(q, conf, page_size=20, offset=0):
     if 'group' in conf.keys():
         params['group'] = conf['group']
     auth = HTTPBasicAuth(conf['user'], conf['API key'])
+    print(q)
+    print(params)
+    print(url)
     res = requests.get(url, params=params, auth=auth, headers=headers)
     return res
 
