@@ -51,6 +51,7 @@ class BibsonomyAutocomplete(autocomplete.Select2ListView):
                 if c['type'] == 'bibsonomy':
                     r = query_bibsonomy(q, c, self.page_size, offset)
                     res = r.json()
+                    print(res)
                     more = res['posts'].get('next', False)
                     if 'post' in res['posts'].keys():
                         for r in res['posts']['post']:
