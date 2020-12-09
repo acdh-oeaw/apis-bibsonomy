@@ -9,9 +9,14 @@ from .utils import BibsonomyEntry
 
 
 def query_bibsonomy(q, conf, page_size=20, offset=0):
+    bibsonomy_bibtex_root_url = "https://www.bibsonomy.org/bibtex/"
+    if q.startswith(bibsonomy_bibtex_root_url):
+        hash = q.split(bibsonomy_bibtex_root_url)[1].split("/")[0]
+        params = {"resource": hash, "resourcetype": "bibtex"}
+    else:
+        params = {'search': q, 'resourcetype': 'bibtex', 'start': offset,
+                  'end': offset + page_size}
     url = f'{conf["url"]}api/posts'
-    params = {'search': q, 'resourcetype': 'bibtex', 'start': offset,
-              'end': offset + page_size}
     headers = {'accept': 'application/json'}
     if 'group' in conf.keys():
         params['group'] = conf['group']
