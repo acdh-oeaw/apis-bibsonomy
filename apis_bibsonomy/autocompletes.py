@@ -21,9 +21,6 @@ def query_bibsonomy(q, conf, page_size=20, offset=0):
     url = f'{conf["url"]}api/posts'
     headers = {'accept': 'application/json'}
     auth = HTTPBasicAuth(conf['user'], conf['API key'])
-    print(q)
-    print(params)
-    print(url)
     res = requests.get(url, params=params, auth=auth, headers=headers)
     return res
 
@@ -54,7 +51,6 @@ class BibsonomyAutocomplete(autocomplete.Select2ListView):
                 if c['type'] == 'bibsonomy':
                     r = query_bibsonomy(q, c, self.page_size, offset)
                     res = r.json()
-                    print(res)
                     more = res['posts'].get('next', False)
                     if 'post' in res['posts'].keys():
                         for r in res['posts']['post']:
