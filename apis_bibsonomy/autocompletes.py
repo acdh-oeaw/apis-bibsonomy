@@ -16,10 +16,10 @@ def query_bibsonomy(q, conf, page_size=20, offset=0):
     else:
         params = {'search': q, 'resourcetype': 'bibtex', 'start': offset,
                   'end': offset + page_size}
+        if 'group' in conf.keys():
+            params['group'] = conf['group']
     url = f'{conf["url"]}api/posts'
     headers = {'accept': 'application/json'}
-    if 'group' in conf.keys():
-        params['group'] = conf['group']
     auth = HTTPBasicAuth(conf['user'], conf['API key'])
     print(q)
     print(params)
