@@ -26,6 +26,7 @@ def query_bibsonomy(q, conf, page_size=20, offset=0):
 
 
 def query_zotero(q, conf, page_size=20, offset=0):
+    # TODO: Implement possibility that user puts in a full url referencing a specific item. Similiar to logic in `query_bibsonomy` above.
     if 'group' in conf.keys():
         add = f"groups/{conf['group']}"
     else:
