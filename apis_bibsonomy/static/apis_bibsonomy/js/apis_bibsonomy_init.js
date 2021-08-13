@@ -33,8 +33,7 @@ $( document ).ready(function() {
 	});
 	$(".bibsonomy-anker").tooltipster({
 		contentCloning: true,
-		interactive: true
-		,
+		interactive: true,
 		content: 'loading...',
 		contentAsHtml: true,
 		trigger: 'click',
@@ -43,7 +42,9 @@ $( document ).ready(function() {
 		maxHeight: 400,
 		zIndex: 900,
 		functionInit: function(instance, helper){
+			try {
 			$('#bibs-form select.listselect2').select2('destroy')
+		} catch (err){console.log(err)} //fixme: shouldnt be needed to destroy and build again
 			$deepc = $('#bibs-form').clone(deepWithDataAndEvents=true)
 			$form_id = 'bibs-form_'+($('#bibs-form').length+1)
 			$deepc.attr('id', $form_id)
