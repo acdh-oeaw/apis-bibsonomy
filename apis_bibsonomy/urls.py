@@ -5,7 +5,7 @@ from . import autocompletes
 app_name = 'apis_bibsonomy'
 
 urlpatterns = [
-    path('save_get/', api_views.SaveCitationEntry.as_view(), name='savegetcitationentry'),
-    path('autocomplete/', autocompletes.CitationsAutocomplete.as_view(), name='citationautocomplete')
+    path('save_get/', api_views.SaveBibsonomyEntry.as_view(), name='savegetbibsonomyentry'),
+    path('autocomplete/', autocompletes.BibsonomyAutocomplete.as_view(), name='bibsonomyautocomplete')
 ]
 

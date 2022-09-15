@@ -13,7 +13,7 @@ from .models import Reference
 from .utils import BibsonomyEntry
 
 
-class SaveCitationEntry(APIView):
+class SaveBibsonomyEntry(APIView):
     @staticmethod
     def _get_str(entry, key):
         if not isinstance(entry, str) and key == "author":
@@ -34,7 +34,7 @@ class SaveCitationEntry(APIView):
         pages_start = request.data.get("pages_start", None)
         pages_end = request.data.get("pages_end", None)
         kind = None
-        sett = getattr(settings, "APIS_CITATIONS_SETTINGS", [])
+        sett = getattr(settings, "APIS_BIBSONOMY", [])
         for s in sett:
             if "url" in s.keys():
                 if s["url"] in bib_ref:
