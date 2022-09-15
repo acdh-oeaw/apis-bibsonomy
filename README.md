@@ -1,6 +1,6 @@
-# APIS Bibsonomy
+# APIS Citations
 
-APIS Bibsonomy is a small addon to the APIS system. It allows to store references in Bibsonomy instances and use these references in APIS.
+APIS Citations is a small addon to the APIS system. It allows to store references in Bibsonomy or Zotero entries and use these references in APIS.
 It is very generic and should work with most Django installations/projects.
 
 ## Installation
@@ -25,12 +25,12 @@ It is very generic and should work with most Django installations/projects.
 ## Configuration
 
 
-APIS Bibsonomy needs an URL of the bibsonomy or zotero instance, a username, a API token and an (optional) collection to search in.
+APIS-Citations needs an URL of the bibsonomy or zotero instance, a username, a API token and an (optional) collection to search in.
 
 You need to add a configuration section to your APIS settings:
 
 ```
-APIS_BIBSONOMY = [{
+APIS_CITATIONS_SETTINGS = [{
    'type': 'bibsomomy', #or zotero
    'url': 'http://url.at', #url of the bibsonomy instance or zotero.org
    'user': 'username', #for zotero use the user id number found in settings
@@ -42,7 +42,7 @@ APIS_BIBSONOMY = [{
 If you want the plugin to add the reference buttons to certain fields you need to add these fields to the config:
 
 ```
-APIS_BIBSONOMY_FIELDS = ['name', 'first_name', 'profession']
+APIS_CITATIONS_FIELDS = ['name', 'first_name', 'profession']
 ```
 
 

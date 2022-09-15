@@ -38,7 +38,7 @@ def query_zotero(q, conf, page_size=20, offset=0):
     return res
 
 
-class BibsonomyAutocomplete(autocomplete.Select2ListView):
+class CitationsAutocomplete(autocomplete.Select2ListView):
 
     def get(self, request, *args, **kwargs):
         choices = []
@@ -71,7 +71,7 @@ class BibsonomyAutocomplete(autocomplete.Select2ListView):
     def __init__(self, page_size=20, group=None, user=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.page_size = page_size
-        self.conf = getattr(settings, "APIS_BIBSONOMY", None)
+        self.conf = getattr(settings, "APIS_CITATIONS_SETTINGS", None)
         #if 'group' in conf.keys():
         #    self.group = conf['group']
         #else:

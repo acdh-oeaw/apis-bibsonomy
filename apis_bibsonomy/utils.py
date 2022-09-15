@@ -14,7 +14,7 @@ class BibsonomyEntry:
         if bib_hash is not None:
             headers = {'accept': 'application/json'}
             if base_set is None:
-                raise ValueError("You need to specify your APIS_BIBSONOMY settings.")
+                raise ValueError("You need to specify your APIS_CITATIONS_SETTINGS.")
             self._user = base_set['user']
             self._api_key = base_set['API key']
             auth = HTTPBasicAuth(self._user, self._api_key)
