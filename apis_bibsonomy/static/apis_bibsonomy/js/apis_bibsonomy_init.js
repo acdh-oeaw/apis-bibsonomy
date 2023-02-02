@@ -52,7 +52,7 @@ $(document).ready(function () {
 			$deepc.children('input#id_object_id').val($bib.bibsObject_pk)
 			$deepc.children('input#id_content_type').val($bib.bibsContenttype)
 			$deepc.children('input#id_attribute').val($bib.bibsAttribute)
-			$res = $('<div class="bibs-container"><table class="table"><thead><tr><td>delete</td><td>authors</td><td>title</td><td>year</td><td>Pages Start</td><td>Pages End</td><td>Folio</td></tr></thead><tbody></tbody></table></div>')
+			$res = $('<div class="bibs-container"><table class="table"><thead><tr><td>delete</td><td>authors</td><td>title</td><td>year</td><td>Pages Start</td><td>Pages End</td><td>Folio</td><td>Notes</td></tr></thead><tbody></tbody></table></div>')
 			$res.append($deepc)
 			$res.append($('<div id="bibs-messages"></div>'))
 			instance.content($res)
@@ -75,7 +75,7 @@ $(document).ready(function () {
 					$('div.bibs-container > table > tbody').html('');
 					$('div.bibs-container > div#bibs-messages').html('');
 					data.responseJSON.forEach(function (entry) {
-						$('div.bibs-container > table > tbody').append($('<tr id="bib-entry-' + entry.pk + '"><td><a href="#" data-bib-id="' + entry.pk + '" class="delete-bib-entry"><i data-feather="trash"></i></a></td><td>' + entry.author + '</td><td>' + entry.title + '</td><td>' + entry.year + '</td><td>' + entry.pages_start + '</td><td>' + entry.pages_end + '</td><td>' + entry.folio + '</td></tr>'))
+						$('div.bibs-container > table > tbody').append($('<tr id="bib-entry-' + entry.pk + '"><td><a href="#" data-bib-id="' + entry.pk + '" class="delete-bib-entry"><i data-feather="trash"></i></a></td><td>' + entry.author + '</td><td>' + entry.title + '</td><td>' + entry.year + '</td><td>' + entry.pages_start + '</td><td>' + entry.pages_end + '</td><td>' + entry.folio + '</td><td>' + entry.notes + '</td></tr>'))
 					});
 					feather.replace()
 				}
