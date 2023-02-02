@@ -12,4 +12,5 @@ class Reference(models.Model):
     object_id = models.PositiveIntegerField()
     attribute = models.CharField(blank=True, null=True, max_length=255)
     last_update = models.DateTimeField(auto_now=True)
-    folio = models.CharField(max_length=255, help_text="String to more precisely define the location of the information", blank=True, null=True)
+    folio = models.CharField(max_length=255, help_text="String to add the folio.", blank=True, null=True)
+    notes = models.CharField(max_length=255, help_text="Use to additionally define the location of the information", blank=True, null=True)
