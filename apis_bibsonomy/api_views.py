@@ -34,6 +34,7 @@ class SaveBibsonomyEntry(APIView):
         pages_start = request.data.get("pages_start", None)
         pages_end = request.data.get("pages_end", None)
         folio = request.data.get("folio", None)
+        notes = request.data.get("notes", None)
         kind = None
         sett = getattr(settings, "APIS_BIBSONOMY", [])
         for s in sett:
@@ -78,6 +79,8 @@ class SaveBibsonomyEntry(APIView):
             r["pages_end"] = pages_end
         if folio is not None and folio != "":
             r["folio"] = folio
+        if notes is not None and notes != "":
+            r["notes"] = notes
         ref = Reference.objects.create(**r)
         m = {"message": "Saved", "ref_id": ref.pk}
         return Response(data=m, status=status.HTTP_201_CREATED)
