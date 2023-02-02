@@ -122,6 +122,10 @@ class SaveBibsonomyEntry(APIView):
                 r2[idx2]["folio"] = ""
             else:
                 r2[idx2]["folio"] = res2.folio
+            if res2.notes is None:
+                r2[idx2]["notes"] = ""
+            else:
+                r2[idx2]["notes"] = res2.notes
         for idx1, v1 in enumerate(r2):
             pre = dict()
             for k, v in v1.items():
