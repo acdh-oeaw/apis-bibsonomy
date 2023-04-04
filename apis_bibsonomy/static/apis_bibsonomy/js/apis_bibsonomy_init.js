@@ -1,36 +1,4 @@
-$(document).ready(function () {
-	$(".bibsonomy-anker-hidden").each(function () {
-		var form_data = $(this).data('bibs-form-elements')
-		var entity_type = $(this).data('bibs-contenttype')
-		if (form_data) {
-			form_data = form_data.split("|")
-			var obj_pk = $(this).data('bibs-object_pk')
-			var f = $(this).parents('.card-body')
-			form_data.forEach(function (item) {
-				if (el !== null) {
-					var node = document.createElement("a");
-					node.setAttribute("class", "bibsonomy-anker")
-					node.setAttribute("data-bibs-contenttype", entity_type)
-					node.setAttribute('data-bibs-object_pk', obj_pk)
-					node2 = document.createElement('i');
-					node2.setAttribute('data-feather', "book-open")
-					node2.setAttribute('style', 'margin-bottom: .5rem')
-					node.append(node2)
-					if (item != 'self') {
-						var el = document.getElementById('div_id_' + item);
-						if (el) {
-							node.setAttribute('data-bibs-attribute', item)
-							el.prepend(node)
-						}
-					} else {
-						$('h1').prepend(node)
-					}
-				}
-			});
-			feather.replace()
-
-		}
-	});
+function reinitialize_bibsonomy_tooltips() {
 	$(".bibsonomy-anker").tooltipster({
 		contentCloning: true,
 		interactive: true,
@@ -82,6 +50,41 @@ $(document).ready(function () {
 			})
 		}
 	})
+}
+$(document).ready(function () {
+	$(".bibsonomy-anker-hidden").each(function () {
+		var form_data = $(this).data('bibs-form-elements')
+		var entity_type = $(this).data('bibs-contenttype')
+		if (form_data) {
+			form_data = form_data.split("|")
+			var obj_pk = $(this).data('bibs-object_pk')
+			var f = $(this).parents('.card-body')
+			form_data.forEach(function (item) {
+				if (el !== null) {
+					var node = document.createElement("a");
+					node.setAttribute("class", "bibsonomy-anker")
+					node.setAttribute("data-bibs-contenttype", entity_type)
+					node.setAttribute('data-bibs-object_pk', obj_pk)
+					node2 = document.createElement('i');
+					node2.setAttribute('data-feather', "book-open")
+					node2.setAttribute('style', 'margin-bottom: .5rem')
+					node.append(node2)
+					if (item != 'self') {
+						var el = document.getElementById('div_id_' + item);
+						if (el) {
+							node.setAttribute('data-bibs-attribute', item)
+							el.prepend(node)
+						}
+					} else {
+						$('h1').prepend(node)
+					}
+				}
+			});
+			feather.replace()
+
+		}
+	});
+	reinitialize_bibsonomy_tooltips();
 });
 
 $(document).on('submit', 'button.bibsonomy-anker', function (event) {
