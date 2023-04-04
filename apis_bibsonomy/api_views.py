@@ -14,6 +14,8 @@ from .utils import BibsonomyEntry
 
 
 class SaveBibsonomyEntry(APIView):
+    permission_classes = [IsAuthenticated] # g.pirgie : this fixes incombatability with projects defining default-drf-permission as 'DjangoObjectPermissions' in settings.py
+    
     @staticmethod
     def _get_str(entry, key):
         if not isinstance(entry, str) and key == "author":
