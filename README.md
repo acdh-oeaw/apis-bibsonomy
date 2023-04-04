@@ -51,7 +51,7 @@ Restart your server and you are good to go.
 
 ## Usage
 
-*not needed if you are using standard templates*
+*not needed if you are using standard APIS templates*
 
 - Include the base template somewhere in the header of your template:
 
