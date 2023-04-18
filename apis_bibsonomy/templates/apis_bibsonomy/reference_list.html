@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load bibsonomy_templatetags %}
+
+{% block content %}
+<ul>
+{% for reference in object_list %}
+<li>
+	{% with reference.bibtex|json_obj as bibtex %}
+	{{ bibtex.title }}
+	{{ reference.pages_start }}
+	{{ reference.pages_end }}
+	{{ reference.folio }}
+	{{ reference.notes }}
+	{{ reference.id }}
+	{% endwith %}
+</li>
+{% empty %}
+<li>No references yet.</li>
+{% endfor %}
+</ul>
+{% endblock content %}

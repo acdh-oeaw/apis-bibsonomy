@@ -1,3 +1,5 @@
+import json
+
 from django import template
 from apis_bibsonomy.forms import ReferenceForm
 
@@ -16,3 +18,7 @@ def bibsonomy_list(content_type=None, object_pk=None, attribute_name=None):
     c_dict = {'content_type': content_type, 'object_pk': object_pk, 'attribute_name': attribute_name}
     form = ReferenceForm(**c_dict)
     return {"form": form}
+
+@register.filter
+def json_obj(value):
+    return json.loads(value)

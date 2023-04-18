@@ -8,9 +8,29 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import viewsets, generics
 
 from .models import Reference
 from .utils import BibsonomyEntry
+from .serializers import ReferenceSerializer, ReferenceQuerySerializer
+
+class ReferenceList(APIView):
+    """
+    API endpoint that allows references to be viewed.
+    """
+    authentication_classes = []
+    permission_classes = []
+
+    def post(self, request, format=None):
+        serializer = ReferenceQuerySerializer(data=request.data, many=True)
+        references = []
+        if serializer.is_valid():
+            for item in serializer.validated_data:
+                print(item)
+                references.extend(list(Reference.objects.filter(**item)))
+        print(references)
+        reference_data = ReferenceSerializer(references, many=True).data
+        return Response(reference_data)
 
 
 class SaveBibsonomyEntry(APIView):

@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
+from django.urls import reverse
 
+import json
 
 class Reference(models.Model):
     """Model that holds the reference to a bibsonomy entry"""
@@ -14,3 +16,15 @@ class Reference(models.Model):
     last_update = models.DateTimeField(auto_now=True)
     folio = models.CharField(max_length=255, help_text="String to add the folio.", blank=True, null=True)
     notes = models.CharField(max_length=255, help_text="Use to additionally define the location of the information", blank=True, null=True)
+
+    def __str__(self):
+        desc = [self.pages_start, self.pages_end, self.folio, self.notes]
+        desc = ', '.join(filter(None, desc))
+        return f"{self.bibtexjson['title']}, {desc}"
+
+    @property
+    def bibtexjson(self):
+        return json.loads(self.bibtex)
+
+    def get_absolute_url(self):
+        return reverse("apis_bibsonomy:referencedetail", kwargs={"pk": self.pk})
