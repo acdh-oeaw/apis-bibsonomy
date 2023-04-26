@@ -1,11 +1,11 @@
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView, SingleObjectMixin
-from django.views.generic.edit import FormMixin, FormView, View
+from django.views.generic.edit import FormMixin, FormView, View, DeleteView
 from django.views.generic.list import MultipleObjectMixin
 from django import forms
 from django.db.models import Q
 from dal import autocomplete
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.shortcuts import redirect
 from django.contrib.contenttypes.models import ContentType
 
@@ -82,3 +82,20 @@ class ReferenceFormView(FormView, SingleObjectMixin):
         else:
             print("form is not valid")
         return redirect(self.get_success_url())
+
+class ReferenceDeleteView(DeleteView):
+    model = Reference
+
+    def get_success_url(self):
+        red = self.request.GET.get('redirect', reverse_lazy('apis_bibsonomy:referencelist'))
+        return red
+
+    def delete(self, request, *args, **kwargs):
+        resp = super().delete(request, *args, **kwargs)
+        # we set the status code to 200 for HTMX requests, so they don't get redirected
+        if "HX-Request" in request.headers:
+            resp.status_code = 200
+        return resp
+
+class ReferenceListView(ListView):
+    model = Reference

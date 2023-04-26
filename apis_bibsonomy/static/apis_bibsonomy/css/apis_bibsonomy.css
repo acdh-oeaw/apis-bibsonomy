@@ -4,3 +4,8 @@ div.tooltipster-content span.select2-container {
 a.bibsonomy-anker {
 	cursor: pointer;
 }
+
+li.htmx-swapping {
+  opacity: 0;
+  transition: opacity 1s ease-out;
+}

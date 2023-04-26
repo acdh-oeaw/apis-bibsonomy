@@ -8,7 +8,9 @@ app_name = 'apis_bibsonomy'
 urlpatterns = [
     path('save_get/', api_views.SaveBibsonomyEntry.as_view(), name='savegetbibsonomyentry'),
     path('autocomplete/', autocompletes.BibsonomyAutocomplete.as_view(), name='bibsonomyautocomplete'),
+    path('references/', views.ReferenceListView.as_view(), name='referencelist'),
     path('references/<int:pk>', views.ReferenceDetailView.as_view(), name='referencedetail'),
+    path('references/<int:pk>/delete', views.ReferenceDeleteView.as_view(), name='referencedelete'),
     path(
         'tempentityclass-autocomplete/',
         views.TempEntityClassAutocomplete.as_view(),
