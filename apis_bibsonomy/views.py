@@ -20,6 +20,13 @@ class TempEntityClassAutocomplete(autocomplete.Select2QuerySetView):
         if self.q:
             qs = qs.filter(name__icontains=self.q)
         return qs
+class TempEntityClassAutocompleteHTMX(ListView):
+    def get_queryset(self):
+        print(self.request.__dict__)
+        qs = TempEntityClass.objects.all()
+        if self.q:
+            qs = qs.filter(name__icontains=self.q)
+        return qs
 
 class TempEntityClassReferenceForm(forms.Form):
     ReferenceToObject = forms.ModelChoiceField(TempEntityClass.objects.all(),widget=autocomplete.ModelSelect2(url='apis_bibsonomy:tempentityclass-autocomplete', attrs={'class': 'form-control'}), label="Add entity")

@@ -40,8 +40,15 @@ Referenced by:
 	{% csrf_token %}
 	<label for="{{ tempentityclassform.ReferenceToObject.id_for_label }}" class="form-label">{{ tempentityclassform.ReferenceToObject.label }}</label>
 	{{ tempentityclassform.ReferenceToObject }}
+
 	<button type="submit" class="btn btn-primary mt-3"/>Add</button>
 </form>
+<form action="" method="post" hx-get="{% url "apis_bibsonomy:tempentityclass-autocompletehtmx" %}" hx-trigger="input from:#foo" hx-target="#entities" list="entities" hx-params="*">
+	<input type="text" list="entities" id="foo">
+	<datalist id="entities">
+	</datalist>
+</form>
+
 </div>
 
 <div class="col">

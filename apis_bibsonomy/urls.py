@@ -21,4 +21,9 @@ urlpatterns = [
         views.TempTripleAutocomplete.as_view(),
         name="temptriple-autocomplete",
     ),
+    path(
+        'tempentityclass-autocompletehtmx/',
+        views.TempEntityClassAutocompleteHTMX.as_view(),
+        name="tempentityclass-autocompletehtmx",
+    ),
 ]
