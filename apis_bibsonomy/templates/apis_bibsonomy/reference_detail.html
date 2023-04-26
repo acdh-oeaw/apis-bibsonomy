@@ -40,8 +40,22 @@ Referenced by:
 	{% csrf_token %}
 	<label for="{{ tempentityclassform.ReferenceToObject.id_for_label }}" class="form-label">{{ tempentityclassform.ReferenceToObject.label }}</label>
 	{{ tempentityclassform.ReferenceToObject }}
+
 	<button type="submit" class="btn btn-primary mt-3"/>Add</button>
 </form>
+<form action="" method="post">
+	{% csrf_token %}
+	<label for="entity" class="form-label">Add entity</label>
+	<input type="text" list="entities" id="entity" name="entity" class="form-control" autocomplete="off"
+	hx-vals="js:{search: document.getElementById('entity').value}"
+	hx-get="{% url "apis_bibsonomy:tempentityclass-autocompletehtmx" %}"
+	hx-trigger="keyup changed"
+	hx-target="#entities">
+	<datalist id="entities">
+	</datalist>
+	<button type="submit" class="btn btn-primary mt-3"/>Add</button>
+</form>
+
 </div>
 
 <div class="col">
