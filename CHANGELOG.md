@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.0](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.4.1...v0.5.0) (2023-04-27)
+
+
+### Features
+
+* add convenience views to bibsonomy ([d30e68f](https://github.com/acdh-oeaw/apis-bibsonomy/commit/d30e68f9f4137754676e94a015f0442138d63cf6))
+
+
+### Bug Fixes
+
+* Set the default_auto_field ([55465d2](https://github.com/acdh-oeaw/apis-bibsonomy/commit/55465d271f1b47031c824dadf3613bd31857d35a))
+
 ## [0.4.1](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.4.0...v0.4.1) (2023-04-04)
 
 
