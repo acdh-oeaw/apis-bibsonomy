@@ -1,11 +1,15 @@
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse
+from django.conf import settings
+from django.db.models import Q
 
 import json
 
+
 class Reference(models.Model):
     """Model that holds the reference to a bibsonomy entry"""
+
     bibs_url = models.URLField()
     pages_start = models.PositiveIntegerField(blank=True, null=True)
     pages_end = models.PositiveIntegerField(blank=True, null=True)
@@ -29,3 +33,21 @@ class Reference(models.Model):
 
     def get_absolute_url(self):
         return reverse("apis_bibsonomy:referencedetail", kwargs={"pk": self.pk})
+
+    @property
+    def referenced_object(self):
+        return self.content_type.get_object_for_this_type(id=self.object_id)
+
+    @property
+    def similar_references(self, with_self=False):
+        similarity_fields = getattr(
+            settings,
+            "BIBSONOMY_REFERENCE_SIMILARITY",
+            ["bibs_url"],
+        )
+        similarity = Q()
+        for field in similarity_fields:
+            similarity &= Q(**{field: getattr(self, field)})
+        if not with_self:
+            return Reference.objects.exclude(pk=self.pk).filter(similarity)
+        return Reference.objects.filter(similarity)
