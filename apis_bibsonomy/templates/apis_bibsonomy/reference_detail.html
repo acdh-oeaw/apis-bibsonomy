@@ -5,6 +5,7 @@
 <div class="container">
 <div class="px-4 py-5 my-5 text-center">
 <h1>{{ reference }}</h1>
+on {{ reference.referenced_object }}
 </div>
 <details>
 	<summary>bibtex</summary>
@@ -15,11 +16,13 @@
 
 Also referenced by:
 <ul>
-{% for ref, obj in referenced_objects %}
+{% for ref in similar_references %}
 <li>
+{% with similar_references.referenced_object as obj %}
 {% if obj.get_absolute_url %}<a href="{{ obj.get_absolute_url }}">{{ obj }}</a>{% else %}{{ obj }}{% endif %}
 (<a href="{{ ref.get_absolute_url }}">{{ ref.id }}</a>)
 <a href="{% url "apis_bibsonomy:referencedelete" ref.id %}?redirect={% url "apis_bibsonomy:referencedetail" reference.id %}">Delete</a>
+{% endwith %}
 </li>
 {% endfor %}
 </ul>
