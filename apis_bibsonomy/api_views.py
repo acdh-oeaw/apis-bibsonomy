@@ -10,7 +10,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .models import Reference
-from .utils import BibsonomyEntry
+from .utils import BibsonomyEntry, get_bibtex_from_url
 
 
 class SaveBibsonomyEntry(APIView):
@@ -37,29 +37,11 @@ class SaveBibsonomyEntry(APIView):
         pages_end = request.data.get("pages_end", None)
         folio = request.data.get("folio", None)
         notes = request.data.get("notes", None)
-        kind = None
         sett = getattr(settings, "APIS_BIBSONOMY", [])
-        for s in sett:
-            if "url" in s.keys():
-                if s["url"] in bib_ref:
-                    sett1 = s
-                    kind = s["type"]
         if bib_ref is not None:
             r = {"bibs_url": bib_ref}
-            if kind == "bibsonomy":
-                bib_e = BibsonomyEntry(bib_hash=bib_ref, base_set=sett1)
-                r["bibtex"] = json.dumps(bib_e.bibtex)
-            elif kind == "zotero":
-                for s in sett:
-                    if s["type"] == "zotero":
-                        headers = {
-                            "Zotero-API-Key": s["API key"],
-                            "Zotero-API-Version": "3",
-                        }
-                        params = {"include": "csljson"}
-                        res = requests.get(bib_ref, headers=headers, params=params)
-                        r["bibtex"] = json.dumps(res.json()["csljson"])
-            else:
+            r["bibtex"] = get_bibtex_from_url(bib_ref)
+            if r["bibtex"] is None:
                 m = {"message": "You need to select a publication."}
                 return Response(data=m, status=status.HTTP_400_BAD_REQUEST)
         if obj_id is not None:

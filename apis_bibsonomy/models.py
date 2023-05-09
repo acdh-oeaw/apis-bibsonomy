@@ -3,9 +3,11 @@ from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse
 from django.conf import settings
 from django.db.models import Q
+from .utils import BibsonomyEntry, get_bibtex_from_url
+from django.conf import settings
+import requests
 
 import json
-
 
 class Reference(models.Model):
     """Model that holds the reference to a bibsonomy entry"""
@@ -51,3 +53,21 @@ class Reference(models.Model):
         if not with_self:
             return Reference.objects.exclude(pk=self.pk).filter(similarity)
         return Reference.objects.filter(similarity)
+
+
+
+    def save(
+        self, force_insert=False, force_update=False, using=None, update_fields=None
+    ):
+
+        if update_fields is not None and "bibtex" in update_fields:
+            self.bibtex = None
+        if self.bibtex is None and self.bibs_url is not None:
+            self.bibtex = get_bibtex_from_url(self.bibs_url)
+
+        super().save(
+            force_insert=force_insert,
+            force_update=force_update,
+            using=using,
+            update_fields=update_fields,
+        )
