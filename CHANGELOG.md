@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.0](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.6.0...v0.7.0) (2023-05-22)
+
+
+### Features
+
+* move bibtex fetching to utils ([b0af808](https://github.com/acdh-oeaw/apis-bibsonomy/commit/b0af8083d015f78101c96cb11b898c8f822a5c2a))
+
 ## [0.6.0](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.5.0...v0.6.0) (2023-05-17)
 
 
