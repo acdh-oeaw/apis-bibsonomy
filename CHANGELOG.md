@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.1](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.7.0...v0.7.1) (2023-06-09)
+
+
+### Bug Fixes
+
+* typo in template ([85dac48](https://github.com/acdh-oeaw/apis-bibsonomy/commit/85dac483db61c31847146fe03b3de2d5a1677745))
+
 ## [0.7.0](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.6.0...v0.7.0) (2023-05-22)
 
 
