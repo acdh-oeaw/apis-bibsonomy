@@ -1,0 +1,10 @@
+<ul>
+{% for reference in object_list %}
+<li>
+	<a href="{{ reference.get_absolute_url }}">{{ reference }} ({{ reference.id }})</a>
+</li>
+{% empty %}
+<li>No references yet.</li>
+{% endfor %}
+</ul>
+
