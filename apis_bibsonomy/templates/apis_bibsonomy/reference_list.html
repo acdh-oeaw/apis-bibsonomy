@@ -5,14 +5,6 @@
 <div class="px-4 py-5 my-5 text-center">
 <h1>References:</h1>
 </div>
-<ul>
-{% for reference in object_list %}
-<li>
-	<a href="{{ reference.get_absolute_url }}">{{ reference }} ({{ reference.id }})</a>
-</li>
-{% empty %}
-<li>No references yet.</li>
-{% endfor %}
-</ul>
+{% include "apis_bibsonomy/partials/reference_list.html" %}
 </div>
 {% endblock content %}
