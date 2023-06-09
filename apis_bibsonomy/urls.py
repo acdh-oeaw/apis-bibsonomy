@@ -11,4 +11,5 @@ urlpatterns = [
     path('references/', views.ReferenceListView.as_view(), name='referencelist'),
     path('references/<int:pk>', views.ReferenceDetailView.as_view(), name='referencedetail'),
     path('references/<int:pk>/delete', views.ReferenceDeleteView.as_view(), name='referencedelete'),
+    path('referenceson/<int:contenttype>/<int:pk>', views.ReferenceOnListView.as_view(), name="referenceonlist"),
 ]
