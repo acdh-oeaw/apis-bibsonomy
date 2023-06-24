@@ -71,3 +71,9 @@ class Reference(models.Model):
             using=using,
             update_fields=update_fields,
         )
+
+
+class SourceObject(models.Model):
+    source_id = models.URLField()
+    source_type = models.CharField(max_length=128)
+    last_modified_version = models.IntegerField()
