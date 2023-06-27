@@ -1,10 +1,33 @@
-<ul>
+<script src="https://unpkg.com/htmx.org@1.9.0"></script>
+<div id="referencelist">
+{% include "apis_bibsonomy/partials/fix_select2_bootstrap_overflow.html" %}
+<ul class="list-group list-group-flush">
 {% for reference in object_list %}
-<li>
-	<a href="{{ reference.get_absolute_url }}">{{ reference }} ({{ reference.id }})</a>
+<li class="list-group-item justify-content-between align-items-center d-flex">
+  <a href="{{ reference.get_absolute_url }}">{{ reference }} ({{ reference.id }})</a>
+  <a href="{% url "apis_bibsonomy:referencedelete" reference.id %}?redirect={{ request.path }}"
+     hx-delete="{% url "apis_bibsonomy:referencedelete" reference.id %}"
+     hx-confirm="Are your sure you want to delete reference {{ reference }} for {{ reference.referenced_object }}"
+     hx-target="closest li"
+     hx-swap="outerHTML swap:1s">Delete</a>
 </li>
 {% empty %}
 <li>No references yet.</li>
 {% endfor %}
 </ul>
 
+{% if form %}
+{% load crispy_forms_tags %}
+<form method="post" hx-post="{{ request.path }}" hx-target="#referencelist" hx-swap="outerHTML" class="mt-4">
+{% crispy form %}
+</form>
+{% endif %}
+
+<script>
+document.body.addEventListener('htmx:configRequest', (event) => {
+    event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+})
+</script>
+{% include "apis_bibsonomy/partials/reinit_select2.html" %}
+{% include "apis_bibsonomy/partials/fix_select2_bootstrap_focus.html" %}
+</div>

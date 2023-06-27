@@ -1,0 +1,13 @@
+{% comment %}
+This is a workaround for select2 and bootstrap getting into each others way.
+Copied from:
+* https://stackoverflow.com/questions/18487056/select2-doesnt-work-when-embedded-in-a-bootstrap-modal
+
+See also
+* https://github.com/yourlabs/django-autocomplete-light/issues/715
+{% endcomment %}
+<script>
+$(document).ready(function () {
+  $.fn.modal.Constructor.prototype._enforceFocus = function() {};
+});
+</script>
