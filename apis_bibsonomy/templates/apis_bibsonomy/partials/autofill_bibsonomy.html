@@ -1,0 +1,23 @@
+{% comment %}
+iterate through the `last_bibsonomy_reference` that is set in
+the session and use it to fill out the `bibs_url` form field
+{% endcomment %}
+<script>
+function autoFillBibsonomyForm() {
+  {% spaceless %}
+  {% for field, value in request.session.last_bibsonomy_reference.items %}
+  {% if field == "bibs_url" %}
+  var newOption = new Option("{{ request.session.last_bibsonomy_reference_title }}", "{{ value }}", true, true);
+  $('select.listselect2').each(function() {
+    $(this).append(newOption).trigger("change");
+  });
+  {% endif %}
+  {% endfor %}
+  {% endspaceless %}
+}
+document.body.onload = autoFillBibsonomyForm();
+htmx.on("htmx:afterSettle", function(evt) {
+  autoFillBibsonomyForm();
+});
+</script>
+
