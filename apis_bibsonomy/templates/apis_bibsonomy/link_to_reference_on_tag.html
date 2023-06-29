@@ -1,7 +1,7 @@
 <script src="https://unpkg.com/htmx.org@1.9.0"></script>
 <a href="{% url "apis_bibsonomy:referenceonlist" content_type object_pk %}"
    {% if modal %}
-   hx-get="{% url "apis_bibsonomy:referenceonlist" content_type object_pk %}"
+   hx-get="{% url "apis_bibsonomy:referenceonlistmodal" content_type object_pk %}"
    hx-target="#modal-here"
    data-toggle="modal"
    data-target="#referenceModal"

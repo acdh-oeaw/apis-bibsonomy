@@ -8,11 +8,17 @@ function autoFillBibsonomyForm() {
   {% for field, value in request.session.last_bibsonomy_reference.items %}
   {% if field == "bibs_url" %}
   var newOption = new Option("{{ request.session.last_bibsonomy_reference_title }}", "{{ value }}", true, true);
-  $("#id_{{ field }}").append(newOption).trigger("change");
+  $('select.listselect2').each(function() {
+    $(this).append(newOption).trigger("change");
+  });
   {% endif %}
   {% endfor %}
   {% endspaceless %}
 }
 document.body.onload = autoFillBibsonomyForm();
+htmx.on("htmx:afterSettle", function(evt) {
+  autoFillBibsonomyForm();
+});
+
 </script>
 

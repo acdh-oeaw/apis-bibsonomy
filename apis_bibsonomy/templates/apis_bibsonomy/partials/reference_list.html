@@ -1,5 +1,4 @@
 <script src="https://unpkg.com/htmx.org@1.9.0"></script>
-<div id="referencelist">
 {% include "apis_bibsonomy/partials/fix_select2_bootstrap_overflow.html" %}
 <ul class="list-group list-group-flush">
 {% for reference in object_list %}
@@ -18,7 +17,7 @@
 
 {% if form %}
 {% load crispy_forms_tags %}
-<form method="post" hx-post="{{ request.path }}" hx-target="#referencelist" hx-swap="outerHTML" class="mt-4">
+<form method="post" hx-post="{{ hxpost|default:request.path }}" hx-target="{{ hxtarget|default:"#referencelist" }}" hx-swap="innerHTML" class="mt-4">
 {% crispy form %}
 </form>
 {% endif %}
@@ -31,4 +30,3 @@ document.body.addEventListener('htmx:configRequest', (event) => {
 {% include "apis_bibsonomy/partials/reinit_select2.html" %}
 {% include "apis_bibsonomy/partials/fix_select2_bootstrap_focus.html" %}
 {% include "apis_bibsonomy/partials/autofill_bibsonomy.html" %}
-</div>
