@@ -15,12 +15,16 @@ https://github.com/yourlabs/django-autocomplete-light/issues/1221
 The above mentioned solutions did not work in our case.
 {% endcomment %}
 function reinitSelect2(something) {
-  $('#id_bibs_url').select2({
-    ajax: {
-      url: $('#id_bibs_url').data('autocomplete-light-url'),
-    },
-    templateResult: tohtml,
-    templateSelection: tohtml,
+  $('select.listselect2').each(function() {
+    if ($(this).is("#id_bibs_url")) {
+      $(this).select2({
+        ajax: {
+          url: $('#id_bibs_url').data('autocomplete-light-url'),
+        },
+        templateResult: tohtml,
+        templateSelection: tohtml,
+      });
+    }
   });
   $('.select2-selection').addClass("form-control");
 }
