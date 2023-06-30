@@ -48,7 +48,7 @@ class ReferenceOnListView(ReferenceListView, FormMixin, ProcessFormView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["object"] = self.contenttype.model_class()(self.pk)
+        context["object"] = self.contenttype.get_object_for_this_type(id=self.pk)
         return context
 
     def get_template_names(self):
