@@ -60,12 +60,11 @@ class ReferenceOnListView(ReferenceListView, FormMixin, ProcessFormView):
         # we store the data about the last entered entry in the session
         # so we can automatically fill the form with the last reference
         self.request.session["last_bibsonomy_reference"] = form.cleaned_data.copy()
-        ref = Reference.objects.filter(bibs_url=form.cleaned_data['bibs_url']).order_by("last_update").first()
-        self.request.session["last_bibsonomy_reference_title"] = ref.bibtexjson.get("title")
 
         args['content_type'] = ContentType.objects.get_for_id(self.request.resolver_match.kwargs['contenttype'])
         args['object_id'] = self.request.resolver_match.kwargs['pk']
         ref = Reference.objects.create(**args)
+        self.request.session["last_bibsonomy_reference_title"] = ref.bibtexjson.get("title")
         return super().form_valid(form)
 
 
