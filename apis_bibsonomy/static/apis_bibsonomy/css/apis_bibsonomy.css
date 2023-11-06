@@ -4,3 +4,11 @@ div.tooltipster-content span.select2-container {
 a.bibsonomy-anker {
 	cursor: pointer;
 }
+
+#referenceondialog {
+  font-size: 80%;
+  text-align: left;
+  border: 1px solid rgba(0,0,0,.2);
+  border-radius: .3rem;
+}
+
