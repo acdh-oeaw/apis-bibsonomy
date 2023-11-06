@@ -6,6 +6,7 @@ authors = ["Matthias Schlögl <m.schloegl@gmail.com>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
+python = "^3.11"
 Django = ">=3.0"
 
 [build-system]
