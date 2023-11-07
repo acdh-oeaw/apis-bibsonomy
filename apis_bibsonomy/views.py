@@ -4,6 +4,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView, FormMixin, ProcessFormView
 from django.urls import reverse_lazy, reverse
 from django.http import Http404
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Reference
 from .forms import ReferenceNewForm
@@ -18,7 +19,7 @@ class ReferenceDetailView(DetailView):
         return context
 
 
-class ReferenceDeleteView(DeleteView):
+class ReferenceDeleteView(LoginRequiredMixin, DeleteView):
     model = Reference
 
     def get_success_url(self):
@@ -50,12 +51,16 @@ class ReferenceOnListView(ReferenceListView, FormMixin, ProcessFormView):
         context = super().get_context_data(**kwargs)
         context["contenttype"] = self.contenttype
         context["object"] = self.contenttype.get_object_for_this_type(id=self.pk)
+        if not self.request.user.is_authenticated:
+            del context["form"]
         return context
 
     def get_success_url(self):
         return reverse('apis_bibsonomy:referenceonlist', kwargs=self.request.resolver_match.kwargs)
 
     def form_valid(self, form):
+        if not self.request.user.is_authenticated:
+            return super().form_invalid(form)
         args = form.cleaned_data
         # we store the data about the last entered entry in the session
         # so we can automatically fill the form with the last reference
