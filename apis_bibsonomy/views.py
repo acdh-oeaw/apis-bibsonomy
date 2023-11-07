@@ -48,15 +48,9 @@ class ReferenceOnListView(ReferenceListView, FormMixin, ProcessFormView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context["contenttype"] = self.contenttype
         context["object"] = self.contenttype.get_object_for_this_type(id=self.pk)
         return context
-
-    def get_template_names(self):
-        # return only a partial if the request is ajax or htmx
-        partial = "HX-Request" in self.request.headers or self.request.headers.get('x-requested-with') == 'XMLHttpRequest'
-        if partial:
-            return "apis_bibsonomy/partials/reference_list.html"
-        return super().get_template_names()
 
     def get_success_url(self):
         return reverse('apis_bibsonomy:referenceonlist', kwargs=self.request.resolver_match.kwargs)
@@ -72,3 +66,17 @@ class ReferenceOnListView(ReferenceListView, FormMixin, ProcessFormView):
         ref = Reference.objects.create(**args)
         self.request.session["last_bibsonomy_reference_title"] = ref.bibtexjson.get("title")
         return super().form_valid(form)
+
+
+class ReferenceOnListViewModal(ReferenceOnListView):
+    template_name = "apis_bibsonomy/reference_list_modal.html"
+
+    def get_success_url(self):
+        return reverse('apis_bibsonomy:referenceonlistmodal', kwargs=self.request.resolver_match.kwargs)
+
+
+class ReferenceOnListViewPartial(ReferenceOnListView):
+    template_name = "apis_bibsonomy/partials/reference_list.html"
+
+    def get_success_url(self):
+        return reverse('apis_bibsonomy:referenceonlistpartial', kwargs=self.request.resolver_match.kwargs)
