@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.0](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.7.2...v0.8.0) (2023-11-14)
+
+
+### Features
+
+* add link_to_reference_on templatetag ([9e960fc](https://github.com/acdh-oeaw/apis-bibsonomy/commit/9e960fcd99766c9c30360ab646c53bf8066e50ad))
+* implement referenceonlist view ([8f47ddb](https://github.com/acdh-oeaw/apis-bibsonomy/commit/8f47ddb99c8e8276138b3d747bec9d7cebd6c545))
+* **ReferenceOnListView:** add form to add new reference ([3fff43c](https://github.com/acdh-oeaw/apis-bibsonomy/commit/3fff43cfb56e3fa13ba94b35d4149b72fabcda13))
+* **ReferenceOnListView:** load last added bibsononmy title in form ([04519be](https://github.com/acdh-oeaw/apis-bibsonomy/commit/04519be58aa448cba7e267417957de64391c4ff6))
+* **ReferenceOnListView:** split view into multiple views ([f14ae9e](https://github.com/acdh-oeaw/apis-bibsonomy/commit/f14ae9e318c919a21e689a621c2fbb0870fde2fc))
+
+
+### Bug Fixes
+
+* add basic auth check ([c1279fa](https://github.com/acdh-oeaw/apis-bibsonomy/commit/c1279fa1b229f211301845fba1a7f7df13148f5c))
+
 ## [0.7.2](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.7.1...v0.7.2) (2023-11-06)
 
 
