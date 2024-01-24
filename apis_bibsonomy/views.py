@@ -28,6 +28,13 @@ class ReferenceDeleteView(LoginRequiredMixin, DeleteView):
         )
         return red
 
+    def delete(self, request, *args, **kwargs):
+        resp = super().delete(request, *args, **kwargs)
+        # we set the status code to 200 for HTMX requests, so they don't get redirected
+        if "HX-Request" in request.headers:
+            resp.status_code = 200
+        return resp
+
 
 class ReferenceListView(ListView):
     model = Reference
