@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.1](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.8.0...v0.8.1) (2024-01-24)
+
+
+### Bug Fixes
+
+* allow delete with htmx ([5e58fc4](https://github.com/acdh-oeaw/apis-bibsonomy/commit/5e58fc40dcd9318116f1c68b2b8206dd00d0370f))
+
 ## [0.8.0](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.7.2...v0.8.0) (2023-11-14)
 
 
