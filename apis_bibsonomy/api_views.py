@@ -5,7 +5,7 @@ import requests
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -14,7 +14,7 @@ from .utils import BibsonomyEntry, get_bibtex_from_url
 
 
 class SaveBibsonomyEntry(APIView):
-    permission_classes = [IsAuthenticated] # g.pirgie : this fixes incombatability with projects defining default-drf-permission as 'DjangoObjectPermissions' in settings.py
+    permission_classes = [IsAuthenticatedOrReadOnly] # g.pirgie : this fixes incombatability with projects defining default-drf-permission as 'DjangoObjectPermissions' in settings.py
     
     @staticmethod
     def _get_str(entry, key):
