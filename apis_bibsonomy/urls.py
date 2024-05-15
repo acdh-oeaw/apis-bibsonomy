@@ -1,9 +1,12 @@
-from rest_framework.routers import DefaultRouter
-from django.urls import path
+from rest_framework import routers
+from django.urls import include, path
 from . import api_views, views
 from . import autocompletes
 
 app_name = 'apis_bibsonomy'
+
+router = routers.DefaultRouter()
+router.register(r'references', api_views.ReferenceViewSet)
 
 urlpatterns = [
     path('save_get/', api_views.SaveBibsonomyEntry.as_view(), name='savegetbibsonomyentry'),
@@ -14,4 +17,5 @@ urlpatterns = [
     path('referenceson/<int:contenttype>/<int:pk>', views.ReferenceOnListView.as_view(), name="referenceonlist"),
     path('referenceson/<int:contenttype>/<int:pk>/modal', views.ReferenceOnListViewModal.as_view(), name="referenceonlistmodal"),
     path('referenceson/<int:contenttype>/<int:pk>/partial', views.ReferenceOnListViewPartial.as_view(), name="referenceonlistpartial"),
+    path("api/", include(router.urls)),
 ]
