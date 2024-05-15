@@ -8,8 +8,10 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import viewsets
 
 from .models import Reference
+from .serializers import ReferenceSerializer
 from .utils import BibsonomyEntry, get_bibtex_from_url
 
 
@@ -125,3 +127,8 @@ class SaveBibsonomyEntry(APIView):
         ref = Reference.objects.get(pk=request.data.get("pk"))
         ref.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class ReferenceViewSet(viewsets.ModelViewSet):
+    queryset = Reference.objects.all()
+    serializer_class = ReferenceSerializer
