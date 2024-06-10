@@ -4,6 +4,7 @@ version = "0.9.0"
 description = "Bibsonomy/Zotero plugin for managing refernces in APIS framework"
 authors = ["Matthias Schlögl <m.schloegl@gmail.com>"]
 license = "MIT"
+readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
