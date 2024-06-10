@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.1](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.9.0...v0.9.1) (2024-06-10)
+
+
+### Bug Fixes
+
+* **build:** set README.md as the readme in pyproject.toml ([763fe37](https://github.com/acdh-oeaw/apis-bibsonomy/commit/763fe37d1b31e7d53750ccd912ee86fa174f6204))
+
 ## [0.9.0](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.8.1...v0.9.0) (2024-06-10)
 
 
