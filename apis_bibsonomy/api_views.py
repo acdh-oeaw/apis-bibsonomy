@@ -1,8 +1,5 @@
 import json
-import re
 
-import requests
-from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
@@ -12,7 +9,7 @@ from rest_framework import viewsets
 
 from .models import Reference
 from .serializers import ReferenceSerializer
-from .utils import BibsonomyEntry, get_bibtex_from_url
+from .utils import get_bibtex_from_url
 
 
 class SaveBibsonomyEntry(APIView):
@@ -39,7 +36,6 @@ class SaveBibsonomyEntry(APIView):
         pages_end = request.data.get("pages_end", None)
         folio = request.data.get("folio", None)
         notes = request.data.get("notes", None)
-        sett = getattr(settings, "APIS_BIBSONOMY", [])
         if bib_ref is not None:
             r = {"bibs_url": bib_ref}
             r["bibtex"] = get_bibtex_from_url(bib_ref)

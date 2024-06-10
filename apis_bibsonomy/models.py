@@ -3,9 +3,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse
 from django.conf import settings
 from django.db.models import Q
-from .utils import BibsonomyEntry, get_bibtex_from_url
-from django.conf import settings
-import requests
+from .utils import get_bibtex_from_url
 
 import json
 
