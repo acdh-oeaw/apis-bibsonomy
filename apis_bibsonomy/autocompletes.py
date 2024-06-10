@@ -72,19 +72,3 @@ class BibsonomyAutocomplete(autocomplete.Select2ListView):
         super().__init__(*args, **kwargs)
         self.page_size = page_size
         self.conf = getattr(settings, "APIS_BIBSONOMY", None)
-        #if 'group' in conf.keys():
-        #    self.group = conf['group']
-        #else:
-        #    self.group = None
-        #if 'user' in conf.keys():
-        #    self.user = conf['user']
-        #else:
-        #    raise ValueError('You need to specify a User.')
-        #if 'API key' in conf.keys():
-        #    self.api_key = conf['API key']
-        #else:
-        #    raise ValueError('You need to specify a API key to access the server.')
-       # if 'url' in conf.keys():
-         #   self.url = conf['url']
-        #else:
-         #   raise ValueError('You need to specify a BASE url of the Bibsonomy instance.')
