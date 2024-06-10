@@ -5,4 +5,4 @@ from .models import Reference
 class ReferenceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reference
-        fields = '__all__'
+        fields = "__all__"

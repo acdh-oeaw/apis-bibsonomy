@@ -4,20 +4,29 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('apis_bibsonomy', '0002_reference_folio'),
+        ("apis_bibsonomy", "0002_reference_folio"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='reference',
-            name='notes',
-            field=models.CharField(blank=True, help_text='Use to additionally define the location of the information', max_length=255, null=True),
+            model_name="reference",
+            name="notes",
+            field=models.CharField(
+                blank=True,
+                help_text="Use to additionally define the location of the information",
+                max_length=255,
+                null=True,
+            ),
         ),
         migrations.AlterField(
-            model_name='reference',
-            name='folio',
-            field=models.CharField(blank=True, help_text='String to add the folio.', max_length=255, null=True),
+            model_name="reference",
+            name="folio",
+            field=models.CharField(
+                blank=True,
+                help_text="String to add the folio.",
+                max_length=255,
+                null=True,
+            ),
         ),
     ]
