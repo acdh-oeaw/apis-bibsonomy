@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.0](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.8.1...v0.9.0) (2024-06-10)
+
+
+### Features
+
+* add a basic api endpoint for references ([8158819](https://github.com/acdh-oeaw/apis-bibsonomy/commit/81588198e4483e50aadac4d3e6f04622bfcbd654)), closes [#49](https://github.com/acdh-oeaw/apis-bibsonomy/issues/49)
+* add admin integration for references ([428999e](https://github.com/acdh-oeaw/apis-bibsonomy/commit/428999e4130ef6a471f7710df4b5af81f1b84a35))
+
 ## [0.8.1](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.8.0...v0.8.1) (2024-01-24)
 
 
