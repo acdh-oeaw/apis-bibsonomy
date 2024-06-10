@@ -39,6 +39,7 @@ class ReferenceDeleteView(LoginRequiredMixin, DeleteView):
 class ReferenceListView(ListView):
     model = Reference
 
+
 class ReferenceOnListView(ReferenceListView, FormMixin, ProcessFormView):
     form_class = ReferenceNewForm
 
@@ -52,7 +53,9 @@ class ReferenceOnListView(ReferenceListView, FormMixin, ProcessFormView):
         return super().dispatch(*args, **kwargs)
 
     def get_queryset(self):
-        return self.model.objects.filter(content_type=self.contenttype, object_id=self.pk)
+        return self.model.objects.filter(
+            content_type=self.contenttype, object_id=self.pk
+        )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -63,7 +66,9 @@ class ReferenceOnListView(ReferenceListView, FormMixin, ProcessFormView):
         return context
 
     def get_success_url(self):
-        return reverse('apis_bibsonomy:referenceonlist', kwargs=self.request.resolver_match.kwargs)
+        return reverse(
+            "apis_bibsonomy:referenceonlist", kwargs=self.request.resolver_match.kwargs
+        )
 
     def form_valid(self, form):
         if not self.request.user.is_authenticated:
@@ -73,10 +78,14 @@ class ReferenceOnListView(ReferenceListView, FormMixin, ProcessFormView):
         # so we can automatically fill the form with the last reference
         self.request.session["last_bibsonomy_reference"] = form.cleaned_data.copy()
 
-        args['content_type'] = ContentType.objects.get_for_id(self.request.resolver_match.kwargs['contenttype'])
-        args['object_id'] = self.request.resolver_match.kwargs['pk']
+        args["content_type"] = ContentType.objects.get_for_id(
+            self.request.resolver_match.kwargs["contenttype"]
+        )
+        args["object_id"] = self.request.resolver_match.kwargs["pk"]
         ref = Reference.objects.create(**args)
-        self.request.session["last_bibsonomy_reference_title"] = ref.bibtexjson.get("title")
+        self.request.session["last_bibsonomy_reference_title"] = ref.bibtexjson.get(
+            "title"
+        )
         return super().form_valid(form)
 
 
@@ -84,11 +93,17 @@ class ReferenceOnListViewModal(ReferenceOnListView):
     template_name = "apis_bibsonomy/reference_list_modal.html"
 
     def get_success_url(self):
-        return reverse('apis_bibsonomy:referenceonlistmodal', kwargs=self.request.resolver_match.kwargs)
+        return reverse(
+            "apis_bibsonomy:referenceonlistmodal",
+            kwargs=self.request.resolver_match.kwargs,
+        )
 
 
 class ReferenceOnListViewPartial(ReferenceOnListView):
     template_name = "apis_bibsonomy/partials/reference_list.html"
 
     def get_success_url(self):
-        return reverse('apis_bibsonomy:referenceonlistpartial', kwargs=self.request.resolver_match.kwargs)
+        return reverse(
+            "apis_bibsonomy:referenceonlistpartial",
+            kwargs=self.request.resolver_match.kwargs,
+        )

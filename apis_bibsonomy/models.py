@@ -7,6 +7,7 @@ from .utils import get_bibtex_from_url
 
 import json
 
+
 class Reference(models.Model):
     """Model that holds the reference to a bibsonomy entry"""
 
@@ -18,11 +19,18 @@ class Reference(models.Model):
     object_id = models.PositiveIntegerField()
     attribute = models.CharField(blank=True, null=True, max_length=255)
     last_update = models.DateTimeField(auto_now=True)
-    folio = models.CharField(max_length=255, help_text="String to add the folio.", blank=True, null=True)
-    notes = models.CharField(max_length=255, help_text="Use to additionally define the location of the information", blank=True, null=True)
+    folio = models.CharField(
+        max_length=255, help_text="String to add the folio.", blank=True, null=True
+    )
+    notes = models.CharField(
+        max_length=255,
+        help_text="Use to additionally define the location of the information",
+        blank=True,
+        null=True,
+    )
 
     def __str__(self):
-        title = self.bibtexjson.get('title')
+        title = self.bibtexjson.get("title")
         desc = [title, self.pages_start, self.pages_end, self.folio, self.notes]
         desc = ", ".join(map(str, filter(None, desc)))
         return desc
@@ -52,12 +60,9 @@ class Reference(models.Model):
             return Reference.objects.exclude(pk=self.pk).filter(similarity)
         return Reference.objects.filter(similarity)
 
-
-
     def save(
         self, force_insert=False, force_update=False, using=None, update_fields=None
     ):
-
         if update_fields is not None and "bibtex" in update_fields:
             self.bibtex = None
         if self.bibtex is None and self.bibs_url is not None:
