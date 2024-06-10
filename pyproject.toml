@@ -17,6 +17,7 @@ django-autocomplete-light = "^3.11.0"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.4.8"
+deptry = "^0.17.0"
 
 [tool.ruff]
 lint.ignore = ["E501", "F403"]
@@ -24,3 +25,11 @@ lint.ignore = ["E501", "F403"]
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.deptry.package_module_name_map]
+djangorestframework = "rest_framework"
+django-autocomplete-light = ["dal", "dal_select2"]
+django-crispy-forms = "crispy_forms"
+
+[tool.deptry.per_rule_ignores]
+DEP001 = ["apis_core"]
