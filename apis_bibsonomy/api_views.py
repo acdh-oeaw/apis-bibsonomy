@@ -2,7 +2,7 @@ import json
 
 from django.contrib.contenttypes.models import ContentType
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import viewsets
@@ -130,3 +130,4 @@ class SaveBibsonomyEntry(APIView):
 class ReferenceViewSet(viewsets.ModelViewSet):
     queryset = Reference.objects.all()
     serializer_class = ReferenceSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
