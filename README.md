@@ -73,3 +73,7 @@ Restart your server and you are good to go.
 
 `<button class="bibsonomy-anker-hidden" data-bibs-contenttype="person" data-bibs-object_pk={{instance.pk}} data-bibs-form-elements="first_name|name|gender|start_date_written|lat">Ref</button>`
 
+
+# Licenses
+
+The *book* icon used for the reference link is the SVG from the [*Import Contacts* icon from the material symbols](https://fonts.google.com/icons?selected=Material+Symbols+Outlined:import_contacts:FILL@0;wght@400;GRAD@0;opsz@24&icon.query=book&icon.size=24&icon.color=%235f6368)
