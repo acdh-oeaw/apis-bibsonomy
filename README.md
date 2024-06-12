@@ -22,6 +22,11 @@ It is very generic and should work with most Django installations/projects.
 
   `python manage.py migrate`
 
+
+Some functionality from APIS Bibsonomy uses `htmx`, so you should [include htmx
+into your web application](https://htmx.org/docs/#installing).
+
+
 ## Configuration
 
 
