@@ -54,6 +54,21 @@ APIS_BIBSONOMY_FIELDS = ['name', 'first_name', 'profession']
 Restart your server and you are good to go.
 
 
+### htmx
+
+APIS Bibsonomy uses htmx. The delete buttons for references trigger deletion
+via the API delete route which give an empty response on success. HTMX needs to
+be [configured to swap the content even if the response is empty](https://github.com/bigskysoftware/htmx/issues/199):
+```
+document.body.addEventListener('htmx:beforeSwap', function(event) {
+  if (event.detail.xhr.status === 204) {
+    // Swap content even when the response is empty.
+    event.detail.shouldSwap = true;
+  }
+});
+```
+
+
 ## Usage
 
 *not needed if you are using standard APIS templates*
