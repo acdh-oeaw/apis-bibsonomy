@@ -1,9 +1,0 @@
-{% load static %}
-
-<script src="{% static 'apis_bibsonomy/js/apis_bibsonomy_init.js' %}?v=2"></script>
-<link rel="stylesheet" href="{% static 'autocomplete_light/select2.css' %}"/>
-<link rel="stylesheet" href="{% static 'apis_bibsonomy/css/apis_bibsonomy.css' %}"/>
-<script src="https://cdn.jsdelivr.net/npm/tooltipster@4.2.6/dist/js/tooltipster.bundle.min.js" integrity="sha256-glChvCaC6IJq49dkfulAWd7xlkPwA0FEydjhjPBintA=" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tooltipster@4.2.6/dist/css/tooltipster.bundle.min.css" integrity="sha256-Qc4lCfqZWYaHF5hgEOFrYzSIX9Rrxk0NPHRac+08QeQ=" crossorigin="anonymous">
-{% load bibsonomy_templatetags %}
-{% bibsonomy_form content_type='{{ entity_type }}' hidden=True %}
