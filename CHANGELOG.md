@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.0](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.9.1...v0.10.0) (2024-07-29)
+
+
+### Features
+
+* replace feather svg with material svg ([4904c64](https://github.com/acdh-oeaw/apis-bibsonomy/commit/4904c64aa06113886e8c190fd508acb8b0d6af0c))
+
+
+### Bug Fixes
+
+* **apis_view:** set the permission class of the ReferenceViewSet ([2ac0b68](https://github.com/acdh-oeaw/apis-bibsonomy/commit/2ac0b6841f74610188f58487024c62f96952f8ec))
+* drop htmx loading in the templates - it should be done globally ([181852b](https://github.com/acdh-oeaw/apis-bibsonomy/commit/181852b17b0210951a2bd73b2f03a9bbb3aafb8c))
+* **views:** set htmx to use API delete endpoint ([af585ff](https://github.com/acdh-oeaw/apis-bibsonomy/commit/af585ff49ffd14f65d3780a2589b90001cdf36c1))
+
 ## [0.9.1](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.9.0...v0.9.1) (2024-06-10)
 
 
