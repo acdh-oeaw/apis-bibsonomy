@@ -4,6 +4,7 @@ from requests.auth import HTTPBasicAuth
 from django.conf import settings
 import json
 import logging
+from functools import cache
 
 logger = logging.getLogger(__name__)
 
@@ -58,6 +59,7 @@ class BibsonomyEntry:
     autocomplete = property(get_autocomplete)
 
 
+@cache
 def get_bibtex_from_url(url):
     sources = getattr(settings, "APIS_BIBSONOMY", [])
     sources = [s for s in sources if s.get("url") and s.get("url") in url]
