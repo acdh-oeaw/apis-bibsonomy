@@ -1,7 +1,7 @@
 from django.contrib.contenttypes.models import ContentType
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import DeleteView, FormMixin, ProcessFormView
+from django.views.generic.edit import DeleteView, FormMixin, ProcessFormView, UpdateView
 from django.urls import reverse_lazy, reverse
 from django.http import Http404
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -27,6 +27,11 @@ class ReferenceDeleteView(LoginRequiredMixin, DeleteView):
             "redirect", reverse_lazy("apis_bibsonomy:referencelist")
         )
         return red
+
+
+class ReferenceUpdateView(LoginRequiredMixin, UpdateView):
+    model = Reference
+    form_class = ReferenceNewForm
 
 
 class ReferenceListView(ListView):
