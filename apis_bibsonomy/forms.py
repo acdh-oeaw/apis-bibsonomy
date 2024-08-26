@@ -1,7 +1,7 @@
 from django.forms import ModelForm, HiddenInput
 from django.urls import reverse
 from .models import Reference
-from apis_core.apis_entities.fields import ListSelect2
+from dal.autocomplete import ListSelect2
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Row, Column, Div
 
