@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.0](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.10.0...v0.11.0) (2024-08-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* **forms:** drop unused form
+* **templatetags:** drop unused templatetags
+
+### Features
+
+* **templates:** add edit button to reference list template ([9c9f232](https://github.com/acdh-oeaw/apis-bibsonomy/commit/9c9f2322c336e652c086ae4f814c0e2122f9b599))
+* **templates:** add link to referenced object above reference form ([27aaf96](https://github.com/acdh-oeaw/apis-bibsonomy/commit/27aaf966021a8358f3d5730f6217d86e883d6f3d))
+* **templates:** replace term delete with material symbol ([0d3d601](https://github.com/acdh-oeaw/apis-bibsonomy/commit/0d3d601ca77fdc0b042c69989c76330d14ebc92d))
+* **views:** add ReferenceUpdateView for editing exising references ([df36657](https://github.com/acdh-oeaw/apis-bibsonomy/commit/df36657b05d32abd0c5da9910efbdad759ab57b7))
+
+
+### Bug Fixes
+
+* **forms:** drop use of apis listselect2 override ([20644b8](https://github.com/acdh-oeaw/apis-bibsonomy/commit/20644b80a12211771a63f31ae4b40716cb31c6a7))
+* **forms:** set choices of Select2 widget ([5add6fa](https://github.com/acdh-oeaw/apis-bibsonomy/commit/5add6fa6ef2a48a055b72c28ed7d63fcbad1b348))
+* **models:** always update bibsonomy field when saving Reference ([be6a403](https://github.com/acdh-oeaw/apis-bibsonomy/commit/be6a4030418d102fac36115e4c627343031c43b9))
+
+
+### Code Refactoring
+
+* **forms:** drop unused form ([a64fde3](https://github.com/acdh-oeaw/apis-bibsonomy/commit/a64fde364d6b73ef5926994dc691a8dcac0bccfa))
+* **templatetags:** drop unused templatetags ([cec417b](https://github.com/acdh-oeaw/apis-bibsonomy/commit/cec417b58730716171a9b434edabeb7a21838d00))
+
 ## [0.10.0](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.9.1...v0.10.0) (2024-08-26)
 
 
