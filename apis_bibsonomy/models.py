@@ -60,17 +60,7 @@ class Reference(models.Model):
             return Reference.objects.exclude(pk=self.pk).filter(similarity)
         return Reference.objects.filter(similarity)
 
-    def save(
-        self, force_insert=False, force_update=False, using=None, update_fields=None
-    ):
-        if update_fields is not None and "bibtex" in update_fields:
-            self.bibtex = None
-        if self.bibtex is None and self.bibs_url is not None:
+    def save(self, *args, **kwargs):
+        if self.bibs_url:
             self.bibtex = get_bibtex_from_url(self.bibs_url)
-
-        super().save(
-            force_insert=force_insert,
-            force_update=force_update,
-            using=using,
-            update_fields=update_fields,
-        )
+        super().save(*args, **kwargs)
