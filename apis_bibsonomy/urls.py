@@ -26,6 +26,11 @@ urlpatterns = [
         name="referencedetail",
     ),
     path(
+        "references/<int:pk>/update",
+        views.ReferenceUpdateView.as_view(),
+        name="referenceupdate",
+    ),
+    path(
         "references/<int:pk>/delete",
         views.ReferenceDeleteView.as_view(),
         name="referencedelete",
