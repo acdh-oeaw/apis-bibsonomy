@@ -57,6 +57,10 @@ class ReferenceNewForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper(self)
+        if "instance" in kwargs:
+            self.fields["bibs_url"].widget.choices = [
+                (self.initial.get("bibs_url"), self.instance.bibtexjson.get("title"))
+            ]
         self.helper.layout = Layout(
             Row(
                 Div("bibs_url", css_class="col"),
