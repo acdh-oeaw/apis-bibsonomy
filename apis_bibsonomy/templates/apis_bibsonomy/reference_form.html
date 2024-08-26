@@ -3,6 +3,13 @@
 
 {% block content %}
 <div class="container">
+	<h3 class="text-center">
+	{% if form.instance %}
+	{% if form.instance.referenced_object %}
+	Edit reference on <a href="{{ form.instance.referenced_object.get_absolute_url }}">{{ form.instance.referenced_object }}</a>
+	{% endif %}
+	{% endif %}
+	</h3>
 {% crispy form form.helper %}
 </div>
 {% endblock content %}
