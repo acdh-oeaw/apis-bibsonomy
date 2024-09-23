@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse
 from django.conf import settings
@@ -28,6 +29,7 @@ class Reference(models.Model):
         blank=True,
         null=True,
     )
+    referenced_object = GenericForeignKey()
 
     def __str__(self):
         title = self.bibtexjson.get("title")
@@ -41,10 +43,6 @@ class Reference(models.Model):
 
     def get_absolute_url(self):
         return reverse("apis_bibsonomy:referencedetail", kwargs={"pk": self.pk})
-
-    @property
-    def referenced_object(self):
-        return self.content_type.get_object_for_this_type(id=self.object_id)
 
     @property
     def similar_references(self, with_self=False):
