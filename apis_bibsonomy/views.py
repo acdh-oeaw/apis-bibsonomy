@@ -81,9 +81,7 @@ class ReferenceOnListView(ReferenceListView, FormMixin, ProcessFormView):
         )
         args["object_id"] = self.request.resolver_match.kwargs["pk"]
         ref = Reference.objects.create(**args)
-        self.request.session["last_bibsonomy_reference_title"] = ref.bibtexjson.get(
-            "title"
-        )
+        self.request.session["last_bibsonomy_reference_title"] = ref.bibtex.get("title")
         return super().form_valid(form)
 
 

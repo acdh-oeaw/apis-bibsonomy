@@ -5,8 +5,6 @@ from django.conf import settings
 from django.db.models import Q
 from .utils import get_bibtex_from_url
 
-import json
-
 
 class Reference(models.Model):
     """Model that holds the reference to a bibsonomy entry"""
@@ -14,7 +12,7 @@ class Reference(models.Model):
     bibs_url = models.URLField()
     pages_start = models.PositiveIntegerField(blank=True, null=True)
     pages_end = models.PositiveIntegerField(blank=True, null=True)
-    bibtex = models.TextField(blank=True, null=True)
+    bibtex = models.JSONField(blank=True, null=True)
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     attribute = models.CharField(blank=True, null=True, max_length=255)
@@ -30,14 +28,10 @@ class Reference(models.Model):
     )
 
     def __str__(self):
-        title = self.bibtexjson.get("title")
+        title = self.bibtex.get("title")
         desc = [title, self.pages_start, self.pages_end, self.folio, self.notes]
         desc = ", ".join(map(str, filter(None, desc)))
         return desc
-
-    @property
-    def bibtexjson(self):
-        return json.loads(self.bibtex or "{}")
 
     def get_absolute_url(self):
         return reverse("apis_bibsonomy:referencedetail", kwargs={"pk": self.pk})
