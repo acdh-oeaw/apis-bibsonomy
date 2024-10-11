@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.12.0](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.11.0...v0.12.0) (2024-10-11)
+
+
+### Features
+
+* **models:** change field type from TextField to JSONField ([c8b2609](https://github.com/acdh-oeaw/apis-bibsonomy/commit/c8b26097b58ddaa4d2c5d174014ae2ebf5606321))
+
+
+### Bug Fixes
+
+* **models:** replace custom method with GenericForeignKey ([a5c7997](https://github.com/acdh-oeaw/apis-bibsonomy/commit/a5c79978a54be1a2d7d2a27f55719aa94802b95c))
+
 ## [0.11.0](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.10.0...v0.11.0) (2024-08-26)
 
 
