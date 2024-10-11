@@ -3,6 +3,7 @@ from .models import Reference
 from dal.autocomplete import ListSelect2
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Row, Column, Div
+from django.urls import reverse
 
 
 class ReferenceNewForm(ModelForm):
@@ -17,6 +18,9 @@ class ReferenceNewForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        initial = kwargs.get("initial", {})
+        content_type = initial.get("content_type", None)
+        object_id = initial.get("object_id", None)
         self.helper = FormHelper(self)
         if "instance" in kwargs:
             self.fields["bibs_url"].widget.choices = [
@@ -34,3 +38,6 @@ class ReferenceNewForm(ModelForm):
             ),
         )
         self.helper.add_input(Submit("submit", "Submit", css_class="btn-primary"))
+        self.helper.form_class = "dalform"
+        if content_type and object_id:
+            self.helper.form_action = reverse("apis_bibsonomy:referenceonlist", args=[content_type.id, object_id])
