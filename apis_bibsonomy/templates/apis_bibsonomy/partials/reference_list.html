@@ -1,4 +1,5 @@
-{% include "apis_bibsonomy/partials/fix_select2_bootstrap_overflow.html" %}
+References on: {{ object }}
+<div class="mt-4">
 <ul class="list-group list-group-flush">
 {% for reference in object_list %}
 <li class="list-group-item justify-content-between align-items-center d-flex">
@@ -23,14 +24,9 @@
 </ul>
 
 {% if form %}
+<div id="last_bibsonomy_reference" data-title="{{ request.session.last_bibsonomy_reference_title }}" data-url="{{ request.session.last_bibsonomy_reference.bibs_url }}"></div>
 {% load crispy_forms_tags %}
-<form method="post"
-  hx-post="{{ hxpost|default:request.path }}"
-  hx-target="{{ hxtarget|default:"#referencelist" }}"
-  hx-swap="innerHTML"
-  class="mt-4">
-{% crispy form %}
-</form>
+{% crispy form form.helper %}
 {% endif %}
 
 <script>
@@ -38,6 +34,4 @@ document.body.addEventListener('htmx:configRequest', (event) => {
     event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
 })
 </script>
-{% include "apis_bibsonomy/partials/reinit_select2.html" %}
-{% include "apis_bibsonomy/partials/fix_select2_bootstrap_focus.html" %}
-{% include "apis_bibsonomy/partials/autofill_bibsonomy.html" %}
+</div>

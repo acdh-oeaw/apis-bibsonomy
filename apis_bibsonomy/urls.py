@@ -40,10 +40,5 @@ urlpatterns = [
         views.ReferenceOnListViewModal.as_view(),
         name="referenceonlistmodal",
     ),
-    path(
-        "referenceson/<int:contenttype>/<int:pk>/partial",
-        views.ReferenceOnListViewPartial.as_view(),
-        name="referenceonlistpartial",
-    ),
     path("api/", include(router.urls)),
 ]
