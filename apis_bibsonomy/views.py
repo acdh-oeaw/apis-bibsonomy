@@ -50,6 +50,21 @@ class ReferenceOnListView(ReferenceListView, FormMixin, ProcessFormView):
             raise Http404
         return super().dispatch(*args, **kwargs)
 
+    def get_form_kwargs(self, *args, **kwargs) -> dict:
+        kwargs = super().get_form_kwargs(*args, **kwargs)
+        kwargs["pk"] = self.pk
+        kwargs["content_type"] = self.contenttype
+        return kwargs
+
+    def get(self, *args, **kwargs):
+        resp = super().get(*args, **kwargs)
+        resp["HX-Trigger-After-Settle"] = (
+            '{"reinit_select2": "referenceon'
+            + f"{self.contenttype.id}_{self.pk}"
+            + 'dlg"}'
+        )
+        return resp
+
     def get_queryset(self):
         return self.model.objects.filter(
             content_type=self.contenttype, object_id=self.pk
@@ -88,20 +103,10 @@ class ReferenceOnListView(ReferenceListView, FormMixin, ProcessFormView):
 
 
 class ReferenceOnListViewModal(ReferenceOnListView):
-    template_name = "apis_bibsonomy/reference_list_modal.html"
-
-    def get_success_url(self):
-        return reverse(
-            "apis_bibsonomy:referenceonlistmodal",
-            kwargs=self.request.resolver_match.kwargs,
-        )
-
-
-class ReferenceOnListViewPartial(ReferenceOnListView):
     template_name = "apis_bibsonomy/partials/reference_list.html"
 
     def get_success_url(self):
         return reverse(
-            "apis_bibsonomy:referenceonlistpartial",
+            "apis_bibsonomy:referenceonlistmodal",
             kwargs=self.request.resolver_match.kwargs,
         )

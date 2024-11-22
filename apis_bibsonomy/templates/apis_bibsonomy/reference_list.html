@@ -2,12 +2,8 @@
 
 {% block content %}
 <div class="container">
-<div class="px-4 py-5 my-5 text-center">
-  <h1>References on {{ object }}:</h1>
-</div>
-<div id="referencelist">
-{% url "apis_bibsonomy:referenceonlistpartial" contenttype.id object.id as hxpost %}
-{% include "apis_bibsonomy/partials/reference_list.html" with hxpost=hxpost %}
+<div id="referenceon{{ contenttype.id }}_{{ object.pk }}dlg">
+{% include "apis_bibsonomy/partials/reference_list.html" %}
 </div>
 </div>
 {% endblock content %}
