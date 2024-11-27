@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "apis-bibsonomy"
-version = "0.12.0"
+version = "0.12.1"
 description = "Bibsonomy/Zotero plugin for managing refernces in APIS framework"
 authors = ["Matthias Schlögl <m.schloegl@gmail.com>"]
 license = "MIT"
