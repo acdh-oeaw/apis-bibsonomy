@@ -1,3 +1,4 @@
+import json
 from django.db import models
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
@@ -30,10 +31,16 @@ class Reference(models.Model):
     referenced_object = GenericForeignKey()
 
     def __str__(self):
-        title = self.bibtex.get("title")
+        title = self.get_bibtex.get("title")
         desc = [title, self.pages_start, self.pages_end, self.folio, self.notes]
         desc = ", ".join(map(str, filter(None, desc)))
         return desc
+
+    @property
+    def get_bibtex(self):
+        if isinstance(self.bibtex, str):
+            return json.loads(self.bibtex)
+        return self.bibtex
 
     def get_absolute_url(self):
         return reverse("apis_bibsonomy:referencedetail", kwargs={"pk": self.pk})

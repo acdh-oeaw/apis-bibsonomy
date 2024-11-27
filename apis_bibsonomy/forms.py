@@ -20,7 +20,7 @@ class ReferenceNewForm(ModelForm):
         self.helper = FormHelper(self)
         if "instance" in kwargs:
             self.fields["bibs_url"].widget.choices = [
-                (self.initial.get("bibs_url"), self.instance.bibtex.get("title"))
+                (self.initial.get("bibs_url"), self.instance.get_bibtex.get("title"))
             ]
         self.helper.layout = Layout(
             Row(
