@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.12.1](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.12.0...v0.12.1) (2024-11-27)
+
+
+### Bug Fixes
+
+* **models:** create wrapper around bibtex lookup ([66ac860](https://github.com/acdh-oeaw/apis-bibsonomy/commit/66ac860075549846862c5c39fc863501240bc944))
+
 ## [0.12.0](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.11.0...v0.12.0) (2024-10-11)
 
 
