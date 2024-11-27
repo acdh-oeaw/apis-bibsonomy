@@ -3,6 +3,7 @@ from .models import Reference
 from dal.autocomplete import ListSelect2
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Row, Column, Div
+from django.urls import reverse
 
 
 class ReferenceNewForm(ModelForm):
@@ -16,6 +17,8 @@ class ReferenceNewForm(ModelForm):
         help_texts = {"folio": None, "notes": None}
 
     def __init__(self, *args, **kwargs):
+        pk = kwargs.pop("pk", None)
+        content_type = kwargs.pop("content_type", None)
         super().__init__(*args, **kwargs)
         self.helper = FormHelper(self)
         if "instance" in kwargs:
@@ -34,3 +37,9 @@ class ReferenceNewForm(ModelForm):
             ),
         )
         self.helper.add_input(Submit("submit", "Submit", css_class="btn-primary"))
+
+        if pk and content_type:
+            self.helper.attrs = {
+                    "hx-post": reverse("apis_bibsonomy:referenceonlistmodal", args=[content_type.id, pk]),
+                    "hx-target": f"#referenceon{content_type.id}_{pk}dlg",
+            }

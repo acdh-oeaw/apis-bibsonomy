@@ -24,13 +24,7 @@
 
 {% if form %}
 {% load crispy_forms_tags %}
-<form method="post"
-  hx-post="{{ hxpost|default:request.path }}"
-  hx-target="{{ hxtarget|default:"#referencelist" }}"
-  hx-swap="innerHTML"
-  class="mt-4">
-{% crispy form %}
-</form>
+{% crispy form form.helper %}
 {% endif %}
 
 <script>
