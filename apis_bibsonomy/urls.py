@@ -10,11 +10,6 @@ router.register(r"references", api_views.ReferenceViewSet)
 
 urlpatterns = [
     path(
-        "save_get/",
-        api_views.SaveBibsonomyEntry.as_view(),
-        name="savegetbibsonomyentry",
-    ),
-    path(
         "autocomplete/",
         autocompletes.BibsonomyAutocomplete.as_view(),
         name="bibsonomyautocomplete",
