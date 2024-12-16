@@ -40,7 +40,7 @@ class Reference(models.Model):
     def get_bibtex(self):
         if isinstance(self.bibtex, str):
             return json.loads(self.bibtex)
-        return self.bibtex
+        return self.bibtex or {}
 
     def get_absolute_url(self):
         return reverse("apis_bibsonomy:referencedetail", kwargs={"pk": self.pk})
