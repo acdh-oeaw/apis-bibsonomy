@@ -1,6 +1,5 @@
 import requests
 from requests.auth import HTTPBasicAuth
-import json
 
 from django import http
 from dal import autocomplete
@@ -49,6 +48,10 @@ def query_zotero(q, conf, page_size=20, offset=0):
 
 
 class BibsonomyAutocomplete(autocomplete.Select2ListView):
+    def __init__(self, page_size=20, group=None, user=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.page_size = page_size
+
     def get(self, request, *args, **kwargs):
         choices = []
         offset = (int(self.request.GET.get("page", 1)) - 1) * self.page_size
@@ -57,31 +60,24 @@ class BibsonomyAutocomplete(autocomplete.Select2ListView):
         if len(self.q) < 3:
             choices = []
         else:
-            for idx, c in enumerate(self.conf):
-                if c["type"] == "bibsonomy":
-                    r = query_bibsonomy(q, c, self.page_size, offset)
-                    res = r.json()
-                    more = res["posts"].get("next", False)
-                    if "post" in res["posts"].keys():
-                        for r in res["posts"]["post"]:
+            for config in getattr(settings, "APIS_BIBSONOMY", []):
+                match config.get("type", None):
+                    case "bibsonomy":
+                        response = query_bibsonomy(q, config, self.page_size, offset)
+                        data = response.json()
+                        for r in data["posts"].get("post", []):
                             ent = BibsonomyEntry(bib_entry={"post": r})
                             choices.append(
                                 {"id": ent.bib_hash, "text": ent.autocomplete}
                             )
-                elif c["type"] == "zotero":
-                    res = query_zotero(q, c, self.page_size, offset)
-                    if int(res.headers["Total-Results"]) > (self.page_size + offset):
-                        more = True
-                    for r in res.json():
-                        choices.append(
-                            {"id": r["links"]["self"]["href"], "text": r["bib"]}
-                        )
-        return http.HttpResponse(
-            json.dumps({"results": choices + [], "pagination": {"more": more}}),
-            content_type="application/json",
-        )
-
-    def __init__(self, page_size=20, group=None, user=None, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.page_size = page_size
-        self.conf = getattr(settings, "APIS_BIBSONOMY", None)
+                        more = data["posts"].get("next", False)
+                    case "zotero":
+                        res = query_zotero(q, config, self.page_size, offset)
+                        total_results = res.headers["Total-Results"]
+                        more = int(total_results) > (self.page_size + offset)
+                        for result in res.json():
+                            id = result["links"]["self"]["href"]
+                            text = result["bib"]
+                            choices.append({"id": id, "text": text})
+        response = {"results": choices + [], "pagination": {"more": more}}
+        return http.JsonResponse(response)
