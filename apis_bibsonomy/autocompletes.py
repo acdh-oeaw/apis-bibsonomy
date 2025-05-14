@@ -22,7 +22,7 @@ def query_bibsonomy(q, conf, page_size=20, offset=0):
         }
         if "group" in conf.keys():
             params["group"] = conf["group"]
-    url = f'{conf["url"]}api/posts'
+    url = f"{conf['url']}api/posts"
     headers = {"accept": "application/json"}
     auth = HTTPBasicAuth(conf["user"], conf["API key"])
     res = requests.get(url, params=params, auth=auth, headers=headers)
