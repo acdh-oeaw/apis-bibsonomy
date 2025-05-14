@@ -1,0 +1,82 @@
+# SPDX-FileCopyrightText: 2024 Birger Schacht <birger.schacht@oeaw.ac.at>
+# SPDX-License-Identifier: MIT
+name: Run linters
+
+on:
+  - push
+
+jobs:
+  ruff-format:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+
+      - name: Install the project
+        run: uv sync --only-dev
+
+      - name: Run ruff format
+        run: uv run ruff format --check apis_bibsonomy
+
+  ruff-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+
+      - name: Install the project
+        run: uv sync --only-dev
+
+      - name: Run ruff check
+        run: uv run ruff check apis_bibsonomy
+
+  djlint-formatter:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+
+      - name: Install the project
+        run: uv sync --only-dev
+
+      - name: Run ruff check
+        run: uv run djlint --check apis_bibsonomy
+
+  djlint-linter:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+
+      - name: Install the project
+        run: uv sync --only-dev
+
+      - name: Run ruff check
+        run: uv run djlint --lint apis_bibsonomy
+
+  deptry:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+
+      - name: Install the project
+        run: uv sync --only-dev
+
+      - name: Run ruff check
+        run: uv run deptry .
