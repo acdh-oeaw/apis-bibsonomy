@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.2](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.13.1...v0.13.2) (2025-05-14)
+
+
+### Bug Fixes
+
+* **templates:** add lang tag and description meta tag ([bb4d7af](https://github.com/acdh-oeaw/apis-bibsonomy/commit/bb4d7af642a74f0ace57b2950bb143e13448d31d))
+* **templates:** add missing closing div ([45f8f16](https://github.com/acdh-oeaw/apis-bibsonomy/commit/45f8f16cc49d8bf4e14d99541571958a29cd0e62))
+* **templates:** drop use of entity reference ([2ac5749](https://github.com/acdh-oeaw/apis-bibsonomy/commit/2ac5749f327c02fff4b65d20151929f2ab1d9185))
+* **templates:** format templates according to djlint ([70cd586](https://github.com/acdh-oeaw/apis-bibsonomy/commit/70cd586646e1b36a06e8e79c57bb8d921aec502a))
+
 ## [0.13.1](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.13.0...v0.13.1) (2024-12-16)
 
 
