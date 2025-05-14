@@ -1,6 +1,6 @@
 [project]
 name = "apis-bibsonomy"
-version = "0.13.1"
+version = "0.13.2"
 description = "Bibsonomy/Zotero plugin for managing refernces in APIS framework"
 readme = "README.md"
 authors = [{ name = "Matthias Schlögl", email = "m.schloegl@gmail.com"}]
