@@ -34,6 +34,8 @@ class Reference(models.Model):
         title = self.get_bibtex.get("title")
         desc = [title, self.pages_start, self.pages_end, self.folio, self.notes]
         desc = ", ".join(map(str, filter(None, desc)))
+        if self.attribute:
+            desc += f" on field '{self.attribute}'"
         return desc
 
     @property
