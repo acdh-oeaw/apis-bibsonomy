@@ -8,7 +8,6 @@ from django.urls import reverse
 
 class ReferenceNewForm(ModelForm):
     class Media:
-        css = {"all": ["css/apis_bibsonomy.css"]}
         js = ["js/apis_bibsonomy.js"]
 
     class Meta:

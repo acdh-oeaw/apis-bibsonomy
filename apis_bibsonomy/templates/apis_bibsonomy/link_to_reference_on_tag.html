@@ -1,3 +1,7 @@
+{% load static %}
+<link rel="stylesheet"
+      href="{% static 'css/apis_bibsonomy.css' %}"
+      media="all" />
 <a href="{% url "apis_bibsonomy:referenceonlist" content_type object_pk %}"
    {% if modal %} hx-get="{% url "apis_bibsonomy:referenceonlistmodal" content_type object_pk %}" hx-target="#referenceon{{ content_type }}_{{ object_pk }}dlg" onclick="referenceon{{ content_type }}_{{ object_pk }}dlg.showModal()" {% endif %}>
     <svg xmlns="http://www.w3.org/2000/svg"
