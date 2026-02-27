@@ -7,6 +7,8 @@ from dal import autocomplete
 from django.conf import settings
 from .utils import BibsonomyEntry
 
+from .backends.file import FileBackend
+
 
 def query_bibsonomy(q, conf, page_size=20, offset=0):
     bibsonomy_bibtex_root_url = "https://www.bibsonomy.org/bibtex/"
@@ -76,6 +78,15 @@ class BibsonomyAutocomplete(autocomplete.Select2ListView):
                         choices.append(
                             {"id": r["links"]["self"]["href"], "text": r["bib"]}
                         )
+                elif c["type"] == "file":
+                    for result in FileBackend(c).query_file(q, self.page_size, offset):
+                        choices.append(
+                            {
+                                "id": result["links"]["self"]["href"],
+                                "text": result["bib"],
+                            }
+                        )
+
         return http.HttpResponse(
             json.dumps({"results": choices + [], "pagination": {"more": more}}),
             content_type="application/json",

@@ -5,6 +5,7 @@ from django.conf import settings
 import json
 import logging
 from functools import cache
+from .backends.file import FileBackend
 
 logger = logging.getLogger(__name__)
 
@@ -78,6 +79,9 @@ def get_bibtex_from_url(url):
             params = {"include": "csljson"}
             res = requests.get(url, headers=headers, params=params)
             bibtex = json.dumps(res.json()["csljson"])
+        elif btype == "file":
+            backend = FileBackend(source)
+            return json.dumps(backend.get_bibtex_from_url(url))
     except Exception as e:
         logger.warning(f"Could not fetch bibtex from {url}: {e}")
     return bibtex
