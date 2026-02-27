@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.3](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.13.2...v0.13.3) (2026-02-27)
+
+
+### Bug Fixes
+
+* **css:** drop the transform animation ([6457b0f](https://github.com/acdh-oeaw/apis-bibsonomy/commit/6457b0f2987cd509670119da443a91e3f1d58932))
+* **css:** explicitly set font-size to 1rem for .bibsonomydialog ([2748294](https://github.com/acdh-oeaw/apis-bibsonomy/commit/27482940535fb45295b7785e120a0410377c9697))
+* **css:** include the css in the link template instead of the form ([f421974](https://github.com/acdh-oeaw/apis-bibsonomy/commit/f421974016f71ad8ced54797ccc0f95d4f30b78e))
+
 ## [0.13.2](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.13.1...v0.13.2) (2025-05-14)
 
 
