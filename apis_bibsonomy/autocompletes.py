@@ -1,32 +1,9 @@
 import requests
-from requests.auth import HTTPBasicAuth
 import json
 
 from django import http
 from dal import autocomplete
 from django.conf import settings
-from .utils import BibsonomyEntry
-
-
-def query_bibsonomy(q, conf, page_size=20, offset=0):
-    bibsonomy_bibtex_root_url = "https://www.bibsonomy.org/bibtex/"
-    if q.startswith(bibsonomy_bibtex_root_url):
-        hash = q.split(bibsonomy_bibtex_root_url)[1].split("/")[0]
-        params = {"resource": hash, "resourcetype": "bibtex"}
-    else:
-        params = {
-            "search": q,
-            "resourcetype": "bibtex",
-            "start": offset,
-            "end": offset + page_size,
-        }
-        if "group" in conf.keys():
-            params["group"] = conf["group"]
-    url = f"{conf['url']}api/posts"
-    headers = {"accept": "application/json"}
-    auth = HTTPBasicAuth(conf["user"], conf["API key"])
-    res = requests.get(url, params=params, auth=auth, headers=headers)
-    return res
 
 
 def query_zotero(q, conf, page_size=20, offset=0):
@@ -58,17 +35,7 @@ class BibsonomyAutocomplete(autocomplete.Select2ListView):
             choices = []
         else:
             for idx, c in enumerate(self.conf):
-                if c["type"] == "bibsonomy":
-                    r = query_bibsonomy(q, c, self.page_size, offset)
-                    res = r.json()
-                    more = res["posts"].get("next", False)
-                    if "post" in res["posts"].keys():
-                        for r in res["posts"]["post"]:
-                            ent = BibsonomyEntry(bib_entry={"post": r})
-                            choices.append(
-                                {"id": ent.bib_hash, "text": ent.autocomplete}
-                            )
-                elif c["type"] == "zotero":
+                if c["type"] == "zotero":
                     res = query_zotero(q, c, self.page_size, offset)
                     if int(res.headers["Total-Results"]) > (self.page_size + offset):
                         more = True
