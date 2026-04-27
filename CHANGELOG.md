@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.14.0](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.13.3...v0.14.0) (2026-04-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* drop bibsonomy support
+
+### Code Refactoring
+
+* drop bibsonomy support ([c034ea0](https://github.com/acdh-oeaw/apis-bibsonomy/commit/c034ea01b1545d1c71ba79ee5fa662aa7c564226))
+
 ## [0.13.3](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.13.2...v0.13.3) (2026-02-27)
 
 
