@@ -1,34 +1,16 @@
-import requests
 import json
 
 from django import http
 from dal import autocomplete
 from django.conf import settings
+from django.core.paginator import Paginator
 
-
-def query_zotero(q, conf, page_size=20, offset=0):
-    # TODO: Implement possibility that user puts in a full url referencing a specific item. Similiar to logic in `query_bibsonomy` above.
-    if "group" in conf.keys():
-        add = f"groups/{conf['group']}"
-    else:
-        add = f"users/{conf['user']}"
-    url = f"https://api.zotero.org/{add}/items"
-    headers = {"Zotero-API-Key": conf["API key"], "Zotero-API-Version": "3"}
-    params = {
-        "q": q,
-        "qmode": "titleCreatorYear",
-        "include": "bib",
-        "start": offset,
-        "limit": page_size,
-    }
-    res = requests.get(url, headers=headers, params=params)
-    return res
+from .models import ZoteroEntry
 
 
 class BibsonomyAutocomplete(autocomplete.Select2ListView):
     def get(self, request, *args, **kwargs):
         choices = []
-        offset = (int(self.request.GET.get("page", 1)) - 1) * self.page_size
         more = False
         q = self.request.GET.get("q")
         if len(self.q) < 3:
@@ -36,13 +18,24 @@ class BibsonomyAutocomplete(autocomplete.Select2ListView):
         else:
             for idx, c in enumerate(self.conf):
                 if c["type"] == "zotero":
-                    res = query_zotero(q, c, self.page_size, offset)
-                    if int(res.headers["Total-Results"]) > (self.page_size + offset):
-                        more = True
-                    for r in res.json():
+                    ZoteroEntry.fetch_new(c)
+                    pagenr = self.request.GET.get("page", 1)
+                    paginator = Paginator(
+                        ZoteroEntry.objects.filter(
+                            data__data__title__icontains=q
+                        ).order_by("data__data__title"),
+                        self.page_size,
+                    )
+                    page = paginator.get_page(pagenr)
+                    more = page.has_next()
+                    for result in page:
                         choices.append(
-                            {"id": r["links"]["self"]["href"], "text": r["bib"]}
+                            {
+                                "id": result.url,
+                                "text": result.data["bib"],
+                            }
                         )
+
         return http.HttpResponse(
             json.dumps({"results": choices + [], "pagination": {"more": more}}),
             content_type="application/json",
