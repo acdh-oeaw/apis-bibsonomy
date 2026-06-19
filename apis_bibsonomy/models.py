@@ -99,6 +99,10 @@ class ZoteroEntry(models.Model):
             return datetime.fromisoformat(da)
         return None
 
+    @property
+    def bibtex(self):
+        return self.data.get("csljson", {})
+
     @classmethod
     def _iterate_zotero(cls, endpoint: str, headers: dict = {}) -> list:
         items = []
