@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.14.0](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.13.3...v0.14.0) (2026-06-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* drop bibsonomy support
+
+### Features
+
+* **models:** introduce ZoteroEntry model for storing zotero results ([97e537f](https://github.com/acdh-oeaw/apis-bibsonomy/commit/97e537f3e60beb6842c24bdbc6d0976f14ef4976))
+
+
+### Code Refactoring
+
+* drop bibsonomy support ([c034ea0](https://github.com/acdh-oeaw/apis-bibsonomy/commit/c034ea01b1545d1c71ba79ee5fa662aa7c564226))
+
 ## [0.13.3](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.13.2...v0.13.3) (2026-02-27)
 
 
