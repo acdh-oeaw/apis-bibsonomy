@@ -86,6 +86,10 @@ class ZoteroEntry(models.Model):
     def __str__(self):
         return self.data.get("data", {}).get("title", self.url)
 
+    @property
+    def bibtex(self):
+        return self.data.get("csljson", {})
+
     @classmethod
     def _iterate_zotero(cls, endpoint: str, headers: dict = {}) -> list:
         items = []
