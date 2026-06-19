@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load render_form from formsetify %}
 {% load crispy_forms_tags %}
 {% block content %}
     <div class="container">
@@ -9,6 +10,9 @@
                 {% endif %}
             {% endif %}
         </h3>
-        {% crispy form form.helper %}
+        
+        <django-formset endpoint="{{ request.path }}" csrf-token="{{ csrf_token }}">
+          {% render_form form "bootstrap" %}
+        </django-formset>
     </div>
 {% endblock content %}

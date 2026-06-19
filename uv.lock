@@ -17,12 +17,13 @@ wheels = [
 
 [[package]]
 name = "apis-bibsonomy"
-version = "0.13.3"
+version = "0.14.0"
 source = { editable = "." }
 dependencies = [
     { name = "django" },
     { name = "django-autocomplete-light" },
     { name = "django-crispy-forms" },
+    { name = "django-formset" },
     { name = "djangorestframework" },
     { name = "httpx" },
     { name = "requests" },
@@ -40,6 +41,7 @@ requires-dist = [
     { name = "django", specifier = ">=3.0" },
     { name = "django-autocomplete-light", specifier = ">=3.11.0" },
     { name = "django-crispy-forms", specifier = ">=2.1" },
+    { name = "django-formset", specifier = ">=2.2.4" },
     { name = "djangorestframework", specifier = ">=3.15.1" },
     { name = "httpx", specifier = ">=0.28.1" },
     { name = "requests", specifier = ">=2.32.3" },
@@ -208,6 +210,18 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/73/42/c2cfb672493730b963ef377b103e29871c56348a215d0ae8cf362fe8ab1e/django_crispy_forms-2.6.tar.gz", hash = "sha256:4921a1087c6cd4f9fa3c139654c1de1c1c385f8bd6729aaee530bc0121ab4b93", size = 1097838, upload-time = "2026-03-01T09:03:37.138Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/96/e3/4c5915a732d6ab54da8871400852b67529518eedfb6b78ecf10bbccfcabb/django_crispy_forms-2.6-py3-none-any.whl", hash = "sha256:8ee0ae28b6b0ac41ff48a65944480c049fe8d1b0047086874fd7efabf4ec1374", size = 31479, upload-time = "2026-03-01T09:03:36.048Z" },
+]
+
+[[package]]
+name = "django-formset"
+version = "2.2.4"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/bf/9b/73e42f140b938d22eda63a3b5078c8acad3cab9e45aa5c7f07d55963b767/django_formset-2.2.4.tar.gz", hash = "sha256:0eceb9424aad2a3723769a402f7ecc517378441e651f153ff1422304944749f0", size = 1012663, upload-time = "2026-03-30T21:27:14.574Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ad/36/18a36cf5274c0961c57cd453209e439b82ab0909906aad8d86ac1b249c9c/django_formset-2.2.4-py3-none-any.whl", hash = "sha256:3d3c647947d750f877cb3ebdf8c5cc64576f9593ba247f0fed3c096a02513ce2", size = 1338092, upload-time = "2026-03-30T21:27:12.905Z" },
 ]
 
 [[package]]

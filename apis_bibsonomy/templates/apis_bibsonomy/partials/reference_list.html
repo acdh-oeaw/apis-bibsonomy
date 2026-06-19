@@ -1,3 +1,4 @@
+{% load render_form from formsetify %}
 References on: {{ object }}
 <div class="mt-4">
     <ul class="list-group list-group-flush">
@@ -27,8 +28,9 @@ References on: {{ object }}
         <div id="last_bibsonomy_reference"
              data-title="{{ request.session.last_bibsonomy_reference_title }}"
              data-url="{{ request.session.last_bibsonomy_reference.bibs_url }}"></div>
-        {% load crispy_forms_tags %}
-        {% crispy form form.helper %}
+        <django-formset endpoint="{{ request.path }}" csrf-token="{{ csrf_token }}">
+          {% render_form form "bootstrap" %}
+        </django-formset>
     {% endif %}
     <script>
 document.body.addEventListener('htmx:configRequest', (event) => {

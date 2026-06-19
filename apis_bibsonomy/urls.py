@@ -1,5 +1,7 @@
 from rest_framework import routers
 from django.urls import include, path
+from django.views.i18n import JavaScriptCatalog
+from django.views.decorators.cache import cache_page
 from . import api_views, views
 from . import autocompletes
 
@@ -41,4 +43,9 @@ urlpatterns = [
         name="referenceonlistmodal",
     ),
     path("api/", include(router.urls)),
+    path(
+        'jsi18n/',
+        cache_page(3600)(JavaScriptCatalog.as_view(packages=['formset'])),
+        name='javascript-catalog'
+    ),
 ]

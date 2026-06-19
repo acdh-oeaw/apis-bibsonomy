@@ -13,6 +13,7 @@ dependencies = [
    "django-crispy-forms>=2.1",
    "django-autocomplete-light>=3.11.0",
    "httpx>=0.28.1",
+   "django-formset>=2.2.4",
 ]
 
 [tool.uv]

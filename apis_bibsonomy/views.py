@@ -5,6 +5,7 @@ from django.views.generic.edit import DeleteView, FormMixin, ProcessFormView, Up
 from django.urls import reverse_lazy, reverse
 from django.http import Http404
 from django.contrib.auth.mixins import LoginRequiredMixin
+from formset.views import IncompleteSelectResponseMixin, FormView
 
 from .models import Reference
 from .forms import ReferenceNewForm
@@ -38,7 +39,7 @@ class ReferenceListView(ListView):
     model = Reference
 
 
-class ReferenceOnListView(ReferenceListView, FormMixin, ProcessFormView):
+class ReferenceOnListView(FormView, ReferenceListView, FormMixin, ProcessFormView):
     form_class = ReferenceNewForm
 
     def dispatch(self, *args, **kwargs):
