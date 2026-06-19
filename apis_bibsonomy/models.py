@@ -1,6 +1,5 @@
 import httpx
 import hashlib
-import json
 from django.db import models
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
@@ -12,7 +11,6 @@ from django.utils import timezone
 from datetime import timedelta
 
 import logging
-from .utils import get_bibtex_from_url
 
 logger = logging.getLogger(__name__)
 
@@ -40,16 +38,17 @@ class Reference(models.Model):
     referenced_object = GenericForeignKey()
 
     def __str__(self):
-        title = self.get_bibtex.get("title")
+        title = self.zoteroentry.bibtex.get("title")
         desc = [title, self.pages_start, self.pages_end, self.folio, self.notes]
         desc = ", ".join(map(str, filter(None, desc)))
         return desc
 
     @property
-    def get_bibtex(self):
-        if isinstance(self.bibtex, str):
-            return json.loads(self.bibtex)
-        return self.bibtex or {}
+    def zoteroentry(self):
+        try:
+            return ZoteroEntry.objects.get(url=self.bibs_url)
+        except ZoteroEntry.DoesNotExist:
+            return None
 
     def get_absolute_url(self):
         return reverse("apis_bibsonomy:referencedetail", kwargs={"pk": self.pk})
@@ -68,15 +67,6 @@ class Reference(models.Model):
             return Reference.objects.exclude(pk=self.pk).filter(similarity)
         return Reference.objects.filter(similarity)
 
-    def save(self, *args, **kwargs):
-        if self.bibs_url:
-            try:
-                zoteroentry = ZoteroEntry.objects.get(url=self.bibs_url)
-                self.bibtex = zoteroentry.data["csljson"]
-            except ZoteroEntry.DoesNotExist:
-                self.bibtex = get_bibtex_from_url(self.bibs_url)
-        super().save(*args, **kwargs)
-
 
 class ZoteroEntry(models.Model):
     url = models.URLField()
@@ -85,6 +75,10 @@ class ZoteroEntry(models.Model):
 
     def __str__(self):
         return self.data.get("data", {}).get("title", self.url)
+
+    @property
+    def bibtex(self):
+        return self.data.get("csljson", {})
 
     @classmethod
     def _iterate_zotero(cls, endpoint: str, headers: dict = {}) -> list:
