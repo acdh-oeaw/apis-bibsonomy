@@ -46,6 +46,13 @@ class Reference(models.Model):
         return desc
 
     @property
+    def zoteroentry(self):
+        try:
+            return ZoteroEntry.objects.get(url=self.bibs_url)
+        except ZoteroEntry.DoesNotExist:
+            return None
+
+    @property
     def get_bibtex(self):
         if isinstance(self.bibtex, str):
             return json.loads(self.bibtex)
