@@ -40,7 +40,7 @@ class Reference(models.Model):
     referenced_object = GenericForeignKey()
 
     def __str__(self):
-        title = self.get_bibtex.get("title")
+        title = self.zoteroentry.bibtex.get("title")
         desc = [title, self.pages_start, self.pages_end, self.folio, self.notes]
         desc = ", ".join(map(str, filter(None, desc)))
         return desc

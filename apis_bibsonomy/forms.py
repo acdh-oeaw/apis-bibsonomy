@@ -25,8 +25,9 @@ class ReferenceNewForm(ModelForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper(self)
         if "instance" in kwargs:
+            zoteroentry = self.instance.zoteroentry
             self.fields["bibs_url"].widget.choices = [
-                (self.initial.get("bibs_url"), self.instance.get_bibtex.get("title"))
+                (self.initial.get("bibs_url"), zoteroentry.bibtex.get("title"))
             ]
         self.helper.layout = Layout(
             Row(
