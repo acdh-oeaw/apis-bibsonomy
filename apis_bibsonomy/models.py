@@ -1,6 +1,5 @@
 import httpx
 import hashlib
-import json
 from datetime import datetime
 from django.db import models
 from django.contrib.contenttypes.fields import GenericForeignKey
@@ -13,7 +12,6 @@ from django.utils import timezone
 from datetime import timedelta
 
 import logging
-from .utils import get_bibtex_from_url
 
 logger = logging.getLogger(__name__)
 
@@ -53,12 +51,6 @@ class Reference(models.Model):
         except ZoteroEntry.DoesNotExist:
             return None
 
-    @property
-    def get_bibtex(self):
-        if isinstance(self.bibtex, str):
-            return json.loads(self.bibtex)
-        return self.bibtex or {}
-
     def get_absolute_url(self):
         return reverse("apis_bibsonomy:referencedetail", kwargs={"pk": self.pk})
 
@@ -75,15 +67,6 @@ class Reference(models.Model):
         if not with_self:
             return Reference.objects.exclude(pk=self.pk).filter(similarity)
         return Reference.objects.filter(similarity)
-
-    def save(self, *args, **kwargs):
-        if self.bibs_url:
-            try:
-                zoteroentry = ZoteroEntry.objects.get(url=self.bibs_url)
-                self.bibtex = zoteroentry.data["csljson"]
-            except ZoteroEntry.DoesNotExist:
-                self.bibtex = get_bibtex_from_url(self.bibs_url)
-        super().save(*args, **kwargs)
 
 
 class ZoteroEntry(models.Model):
