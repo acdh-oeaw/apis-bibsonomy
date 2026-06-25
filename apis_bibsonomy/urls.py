@@ -41,4 +41,9 @@ urlpatterns = [
         name="referenceonlistmodal",
     ),
     path("api/", include(router.urls)),
+    path(
+        "zoteroentry/autocomplete",
+        views.ZoteroEntryAutocomplete.as_view(),
+        name="zoteroentryautocomplete",
+    ),
 ]
