@@ -1,0 +1,7 @@
+<div class="suggestion {{ object.data.itemType }}"
+     hx-swap-oob="innerHTML:#summary-{{ request.GET.fieldname }}">
+    {% include "apis_bibsonomy/partials/zoteroentry.html" %}
+</div>
+<input type="hidden"
+       name="{{ request.GET.fieldname }}"
+       value="{{ object.url }}">
