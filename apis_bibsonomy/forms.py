@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from .models import Reference
-from dal.autocomplete import ListSelect2
+from .widgets import ZoteroEntryAutocomplete
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Row, Column, Div
 from django.urls import reverse
@@ -13,10 +13,7 @@ class ReferenceNewForm(ModelForm):
     class Meta:
         model = Reference
         exclude = ["content_type", "object_id", "bibtex", "attribute"]
-        attrs = {"data-placeholder": "Type to get suggestions", "data-html": True}
-        widgets = {
-            "bibs_url": ListSelect2(url="bibsonomy:bibsonomyautocomplete", attrs=attrs)
-        }
+        widgets = {"bibs_url": ZoteroEntryAutocomplete()}
         help_texts = {"folio": None, "notes": None}
 
     def __init__(self, *args, **kwargs):
