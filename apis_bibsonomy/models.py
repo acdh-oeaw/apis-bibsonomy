@@ -84,7 +84,7 @@ class ZoteroEntry(models.Model):
     data = models.JSONField(null=True)
 
     def __str__(self):
-        return self.data.get("data", {}).get("title", self.url)
+        return self.data.get("data", {}).get("title", self.url) or "No title"
 
     @classmethod
     def _iterate_zotero(cls, endpoint: str, headers: dict = {}) -> list:
