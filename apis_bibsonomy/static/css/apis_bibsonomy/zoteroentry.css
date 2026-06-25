@@ -1,0 +1,15 @@
+.title {
+  font-size: 1.2em;
+}
+.subtitle {
+  margin-bottom: .5em;
+}
+.metadata {
+  display: inline;
+  span {
+    margin-right: 2em;
+    padding: .25em;
+    background-color: whitesmoke;
+    border-radius: .25em;
+  }
+}
