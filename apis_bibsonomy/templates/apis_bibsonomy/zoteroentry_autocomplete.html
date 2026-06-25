@@ -1,0 +1,14 @@
+{% load static %}
+<link rel="stylesheet"
+      href="{% static "css/apis_bibsonomy/widgets/zoteroentry_autocomplete.css" %}">
+{% for object in page_obj %}
+    <div class="suggestion {{ object.data.itemType }}"
+         hx-get="{% url 'apis_bibsonomy:zoteroentry-autocomplete-select' object.pk %}?fieldname={{ request.GET.fieldname }}"
+         hx-target="previous input[type='hidden']"
+         hx-swap="outerHTML"
+         onclick="this.closest('details').open=false">
+        {% include "apis_bibsonomy/partials/zoteroentry.html" %}
+        <div {% if forloop.last and page_obj.next_page_number %} hx-get="{{ request.path }}{% querystring page=page_obj.next_page_number %}" hx-trigger="intersect once" hx-swap="afterend" hx-target="closest .suggestion" {% endif %}>
+        </div>
+    </div>
+{% endfor %}
