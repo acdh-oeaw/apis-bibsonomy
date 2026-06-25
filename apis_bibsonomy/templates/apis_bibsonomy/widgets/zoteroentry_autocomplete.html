@@ -1,0 +1,31 @@
+<div class="autocomplete-wrapper">
+    <details class="autocomplete"
+             ontoggle="this.querySelector('#autocomplete').focus()">
+        <summary id="summary-{{ widget.name }}"
+                 {% include "django/forms/widgets/attrs.html" %}>
+            {% if widget.object %}
+                {% include "apis_bibsonomy/partials/zoteroentry.html" with object=widget.object %}
+            {% else %}
+                Search...
+            {% endif %}
+        </summary>
+        <input type="hidden"
+               name="{{ widget.name }}"
+               {% if widget.value != None %}value="{{ widget.value|stringformat:'s' }}"{% endif %}
+               {% include "django/forms/widgets/attrs.html" %}>
+        <div class="suggestions-dropdown">
+            <div class="input-container">
+                <input type="text"
+                       id="autocomplete"
+                       name="q"
+                       autocomplete="off"
+                       placeholder="Search ..."
+                       class="form-control"
+                       hx-get="{{ url }}?fieldname={{ widget.name }}"
+                       hx-trigger="input delay:300ms, focus, click"
+                       hx-target="next .suggestions">
+            </div>
+            <div class="suggestions"></div>
+        </div>
+    </details>
+</div>
