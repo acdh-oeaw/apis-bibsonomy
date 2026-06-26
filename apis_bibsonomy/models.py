@@ -1,6 +1,7 @@
 import httpx
 import hashlib
 import json
+from datetime import datetime
 from django.db import models
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
@@ -84,7 +85,19 @@ class ZoteroEntry(models.Model):
     data = models.JSONField(null=True)
 
     def __str__(self):
-        return self.data.get("data", {}).get("title", self.url)
+        return self.data.get("data", {}).get("title", self.url) or "No title"
+
+    @property
+    def date_added(self):
+        if da := self.data.get("data", {}).get("dateAdded", False):
+            return datetime.fromisoformat(da)
+        return None
+
+    @property
+    def date_modified(self):
+        if da := self.data.get("data", {}).get("dateModified", False):
+            return datetime.fromisoformat(da)
+        return None
 
     @classmethod
     def _iterate_zotero(cls, endpoint: str, headers: dict = {}) -> list:

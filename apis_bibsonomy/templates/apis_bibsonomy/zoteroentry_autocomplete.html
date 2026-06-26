@@ -1,0 +1,24 @@
+{% load static %}
+<link rel="stylesheet"
+      href="{% static "css/apis_bibsonomy/zoteroentry_autocomplete.css" %}">
+{% for object in page_obj %}
+    <div class="suggestion {{ object.data.itemType }}"
+         data-url="{{ object.url }}"
+         data-title="{{ object }}"
+         onclick="activateClickedSuggestion(this);"
+         {% if forloop.last and page_obj.next_page_number %} hx-get="{{ request.path }}{% querystring page=page_obj.next_page_number %}" hx-trigger="intersect once" hx-swap="afterend" hx-target="this" {% endif %}>
+        <div class="title">{{ object }}</div>
+        <div class="subtitle">{{ object.data.bib|striptags|safe }}</div>
+        <div class="metadata">
+            {% if object.data.data.itemType %}<span class="itemtype">{{ object.data.data.itemType }}</span>{% endif %}
+            {% if object.data.data.DOI %}<span class="doi">{{ object.data.data.DOI }}</span>{% endif %}
+            {% if object.data.data.ISBN %}<span class="isbn">{{ object.data.data.ISBN }}</span>{% endif %}
+            {% if object.data.data.ISSN %}<span class="isbn">{{ object.data.data.ISSN }}</span>{% endif %}
+            <span class="key">{{ object.data.key }}</span>
+            <span class="date" title="Added">{{ object.date_added|date }}</span>
+            {% if object.date_modified.date != object.date_added.date %}
+                <span class="date" title="Modified">{{ object.date_modified|date }}</span>
+            {% endif %}
+        </div>
+    </div>
+{% endfor %}

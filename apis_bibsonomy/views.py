@@ -6,7 +6,7 @@ from django.urls import reverse_lazy, reverse
 from django.http import Http404
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .models import Reference
+from .models import Reference, ZoteroEntry
 from .forms import ReferenceNewForm
 
 
@@ -110,3 +110,20 @@ class ReferenceOnListViewModal(ReferenceOnListView):
             "apis_bibsonomy:referenceonlistmodal",
             kwargs=self.request.resolver_match.kwargs,
         )
+
+
+class ZoteroEntryAutocomplete(ListView):
+    model = ZoteroEntry
+    paginate_by = 10
+    template_name = "apis_bibsonomy/zoteroentry_autocomplete.html"
+
+    def get_queryset(self):
+        qs = (
+            super()
+            .get_queryset()
+            .exclude(data__data__deleted__isnull=False)
+            .order_by("data__data__title")
+        )
+        if q := self.request.GET.get("q", None):
+            qs = qs.filter(data__data__title__icontains=q)
+        return qs
