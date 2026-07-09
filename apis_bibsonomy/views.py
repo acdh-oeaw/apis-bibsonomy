@@ -1,4 +1,5 @@
 from django.contrib.contenttypes.models import ContentType
+from django.db.models import Q
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView, FormMixin, ProcessFormView, UpdateView
@@ -125,7 +126,15 @@ class ZoteroEntryAutocomplete(ListView):
             .order_by("data__data__title")
         )
         if q := self.request.GET.get("q", None):
-            qs = qs.filter(data__data__title__icontains=q)
+            query_strings = q.split()
+            dbq = Q()
+            for query in query_strings:
+                dbq &= (
+                    Q(data__data__title__icontains=query)
+                    | Q(data__data__creators__icontains=query)
+                    | Q(data__data__date__icontains=query)
+                )
+            qs = qs.filter(dbq)
         return qs
 
 
