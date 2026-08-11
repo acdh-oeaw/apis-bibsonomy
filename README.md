@@ -44,10 +44,10 @@ APIS_BIBSONOMY = [{
 }]
 ```
 
-If you want the plugin to add the reference buttons to certain fields you need to add these fields to the config:
+If you want the plugin to allow adding references to specific fields of models, you need to enable this for the models:
 
 ```
-APIS_BIBSONOMY_FIELDS = ['name', 'first_name', 'profession']
+REFERENCE_PER_FIELD = {"my_ontology.my_model": True}
 ```
 
 
