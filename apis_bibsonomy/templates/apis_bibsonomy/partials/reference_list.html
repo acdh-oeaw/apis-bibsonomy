@@ -34,9 +34,6 @@ References on: {{ object }}
         {% endfor %}
     </ul>
     {% if form %}
-        <div id="last_bibsonomy_reference"
-             data-title="{{ request.session.last_bibsonomy_reference_title }}"
-             data-url="{{ request.session.last_bibsonomy_reference.bibs_url }}"></div>
         {% load crispy_forms_tags %}
         {% crispy form form.helper %}
     {% endif %}
