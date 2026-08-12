@@ -7,7 +7,6 @@ class Command(BaseCommand):
     help = "Fetch new Zotero entries from the Zotero API"
 
     def handle(self, *args, **options):
-        conf = getattr(settings, "APIS_BIBSONOMY", None)
-        for idx, c in enumerate(conf):
+        for c in getattr(settings, "APIS_BIBSONOMY", []):
             if c["type"] == "zotero":
                 ZoteroEntry.fetch_new(c)
