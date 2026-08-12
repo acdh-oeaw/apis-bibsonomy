@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q
 from django.views.generic.list import ListView
@@ -119,6 +120,10 @@ class ZoteroEntryAutocomplete(ListView):
     template_name = "apis_bibsonomy/zoteroentry_autocomplete.html"
 
     def get_queryset(self):
+        # fetch new ZoteroEntry before querying existing ones
+        for c in getattr(settings, "APIS_BIBSONOMY", []):
+            if c["type"] == "zotero":
+                ZoteroEntry.fetch_new(c)
         qs = (
             super()
             .get_queryset()
