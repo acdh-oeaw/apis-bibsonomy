@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.1](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.15.0...v0.15.1) (2026-08-12)
+
+
+### Bug Fixes
+
+* **templates:** drop `added` and `modified` info from zoteroentry list ([b4e66ce](https://github.com/acdh-oeaw/apis-bibsonomy/commit/b4e66ce16427420b7dfdbdf22721f04a08454ff2))
+* **templates:** style the reference similar to the dropdown ([82def81](https://github.com/acdh-oeaw/apis-bibsonomy/commit/82def81ee3a8722065a1907885dac79e81cf9a0a))
+
 ## [0.15.0](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.14.0...v0.15.0) (2026-08-12)
 
 
