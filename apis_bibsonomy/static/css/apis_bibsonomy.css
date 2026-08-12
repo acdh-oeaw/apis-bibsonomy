@@ -8,6 +8,7 @@
     transition: all 0.5s ease-in-out;
     font-size: 1rem;
     text-align: left;
+    width: 50vw;
 
     @starting-style {
         opacity: 0;
