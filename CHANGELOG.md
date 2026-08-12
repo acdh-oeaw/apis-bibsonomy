@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.0](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.14.0...v0.15.0) (2026-08-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* drop `Reference.get_bibtex` and `utils.get_bibtex_from_url`
+
+### Features
+
+* **forms,views,models:** use `ZoteroEntry.bibtex` to lookup title ([50ee618](https://github.com/acdh-oeaw/apis-bibsonomy/commit/50ee6189c06f47fda018d782b6cb8a71ad4ac2a0))
+* **forms:** replace dal.ListSelect2 with custom ZoteroEntryAutocomplete ([d89caf0](https://github.com/acdh-oeaw/apis-bibsonomy/commit/d89caf0e9177ce4ac0fb0e91e55f6a616903e07b))
+* **management:** allow to recreate all cached Zotero entries ([902ca27](https://github.com/acdh-oeaw/apis-bibsonomy/commit/902ca278106b21121da5e2468c92eb99014032b8))
+* **models:** add a bibtex property to the ZoteroEntry model ([0f68c06](https://github.com/acdh-oeaw/apis-bibsonomy/commit/0f68c060fca0b9a7a541f2ac1499ac531249de53))
+* **models:** add a zoteroentry property to the Reference model ([b701a30](https://github.com/acdh-oeaw/apis-bibsonomy/commit/b701a308aa05696d3fa7d4ebbf4920057aca30b0))
+* **models:** add convenience date methods to ZoteroEntry ([757ea02](https://github.com/acdh-oeaw/apis-bibsonomy/commit/757ea028c07dd56115de890d3536ec3dc611c1a9))
+* **views:** add an endpoint that lists & filters zoteroentries ([3cbe026](https://github.com/acdh-oeaw/apis-bibsonomy/commit/3cbe02600cd272a3083dfc43f3b2b945c6d81423))
+* **widgets:** add an htmx autocomplete widget for ZoteroEntry ([3ee6824](https://github.com/acdh-oeaw/apis-bibsonomy/commit/3ee6824354ea060a58d473dd1a3278e007cf9221))
+
+
+### Bug Fixes
+
+* **autocomplete:** also search for creators, not only for title ([488b6cb](https://github.com/acdh-oeaw/apis-bibsonomy/commit/488b6cb51f74e9d111f7042b03eb450a45d547e0)), closes [#120](https://github.com/acdh-oeaw/apis-bibsonomy/issues/120)
+* **css:** align the text in the bibsonomy dialog ([9433c40](https://github.com/acdh-oeaw/apis-bibsonomy/commit/9433c405315f91aa655a2ebec663831aa2119a8d))
+* **css:** set the width of the bibsonomy dialog to 50vw ([ca5f55a](https://github.com/acdh-oeaw/apis-bibsonomy/commit/ca5f55a9c56053415928cd529f800cd059d9f6d4))
+* **models:** add a fallback value if no ZoteroEntry title is found ([439acad](https://github.com/acdh-oeaw/apis-bibsonomy/commit/439acad056f182190064e9338021b614b0842645))
+* **views:** fetch new ZoteroEntry before querying existing ones ([9191570](https://github.com/acdh-oeaw/apis-bibsonomy/commit/9191570412e6f7cdfbde270e8a580dd3e463be55))
+
+
+### Code Refactoring
+
+* drop `Reference.get_bibtex` and `utils.get_bibtex_from_url` ([b70eba8](https://github.com/acdh-oeaw/apis-bibsonomy/commit/b70eba8d48981b3175a13f2ce86725b87e4f9c24))
+
 ## [0.14.0](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.13.3...v0.14.0) (2026-06-19)
 
 
