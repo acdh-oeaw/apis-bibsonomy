@@ -9,8 +9,4 @@
     {% if object.data.data.ISBN %}<span class="isbn">{{ object.data.data.ISBN }}</span>{% endif %}
     {% if object.data.data.ISSN %}<span class="isbn">{{ object.data.data.ISSN }}</span>{% endif %}
     <span class="key">{{ object.data.key }}</span>
-    <span class="date" title="Added">{{ object.date_added|date }}</span>
-    {% if object.date_modified.date != object.date_added.date %}
-        <span class="date" title="Modified">{{ object.date_modified|date }}</span>
-    {% endif %}
 </div>
