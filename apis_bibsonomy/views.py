@@ -119,6 +119,8 @@ class ZoteroEntryAutocomplete(ListView):
     template_name = "apis_bibsonomy/zoteroentry_autocomplete.html"
 
     def get_queryset(self):
+        # fetch new ZoteroEntry before querying existing ones
+        ZoteroEntry.fetch_new(c)
         qs = (
             super()
             .get_queryset()
