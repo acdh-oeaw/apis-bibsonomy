@@ -58,15 +58,6 @@ class ReferenceOnListView(ReferenceListView, FormMixin, ProcessFormView):
         kwargs["content_type"] = self.contenttype
         return kwargs
 
-    def get(self, *args, **kwargs):
-        resp = super().get(*args, **kwargs)
-        resp["HX-Trigger-After-Settle"] = (
-            '{"reinit_select2": "referenceon'
-            + f"{self.contenttype.id}_{self.pk}"
-            + 'dlg"}'
-        )
-        return resp
-
     def get_queryset(self):
         return self.model.objects.filter(
             content_type=self.contenttype, object_id=self.pk
