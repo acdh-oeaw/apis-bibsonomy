@@ -1,3 +1,26 @@
+.reference-item {
+  font-size: small;
+  border: 1px solid #dee2e6;
+  border-radius: .375rem;
+  width: 100%;
+  padding: .375rem .75rem;
+  margin-bottom: .375rem;
+  overflow-y: auto;
+  overflow-wrap: break-word;
+
+  .reference-metadata {
+    display: block;
+    padding-top: 1em;
+
+    span {
+      display: inline;
+      background-color: #86fe9b;
+    }
+  }
+  .notes {
+    padding-top: 1em;
+  }
+}
 .title {
   font-size: 1.2em;
 }
