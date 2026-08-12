@@ -21,7 +21,6 @@ version = "0.14.0"
 source = { editable = "." }
 dependencies = [
     { name = "django" },
-    { name = "django-autocomplete-light" },
     { name = "django-crispy-forms" },
     { name = "djangorestframework" },
     { name = "httpx" },
@@ -37,7 +36,6 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "django", specifier = ">=3.0" },
-    { name = "django-autocomplete-light", specifier = ">=3.11.0" },
     { name = "django-crispy-forms", specifier = ">=2.1" },
     { name = "djangorestframework", specifier = ">=3.15.1" },
     { name = "httpx", specifier = ">=0.28.1" },
@@ -138,15 +136,6 @@ sdist = { url = "https://files.pythonhosted.org/packages/2b/e3/31722f7284c9f4333
 wheels = [
     { url = "https://files.pythonhosted.org/packages/92/b5/38140b1643c00d5c46ce69c78e6980fd285aee223100319631bedee4f5e7/django-5.2.15-py3-none-any.whl", hash = "sha256:0eb4a9bb1853a35b0286dbc6d916bd352c8c2687195a7f2d6f80cefd840e4970", size = 8311957, upload-time = "2026-06-03T13:03:31.329Z" },
 ]
-
-[[package]]
-name = "django-autocomplete-light"
-version = "3.12.1"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "django" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/bc/49/fd4705cd96f313d858f9a8c5fce1c33f1f61adb6b25acc92a924acf0a305/django_autocomplete_light-3.12.1.tar.gz", hash = "sha256:50f7b83681feec6491c38e6114d7a4fe80f9e99a8cc6c8458a3e7bb137ad6b1d", size = 296420, upload-time = "2025-02-26T08:21:16.332Z" }
 
 [[package]]
 name = "django-crispy-forms"
