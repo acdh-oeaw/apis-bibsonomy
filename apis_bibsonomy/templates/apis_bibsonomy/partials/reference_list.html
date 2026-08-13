@@ -34,8 +34,11 @@ References on: {{ object }}
         {% endfor %}
     </ul>
     {% if form %}
-        {% load crispy_forms_tags %}
-        {% crispy form form.helper %}
+        <div class="mt-4 pt-4 border-top">
+            <div class="d-flex justify-content-center fw-bold">Add a new reference</div>
+            {% load crispy_forms_tags %}
+            {% crispy form form.helper %}
+        </div>
     {% endif %}
     <script>
 document.body.addEventListener('htmx:configRequest', (event) => {
