@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.2](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.15.1...v0.15.2) (2026-08-13)
+
+
+### Bug Fixes
+
+* **css:** allow to scroll in the bibsonomy dialog ([e85bc99](https://github.com/acdh-oeaw/apis-bibsonomy/commit/e85bc990f444fab49e91f614862f07d9964e4c22))
+* **templates:** add heading to form ([8fa6cf0](https://github.com/acdh-oeaw/apis-bibsonomy/commit/8fa6cf00adbf130693771c2f33f3900c27999b28))
+* **templates:** replace list item with centered text ([caa6f31](https://github.com/acdh-oeaw/apis-bibsonomy/commit/caa6f31a59dbd508909c65cdf5680c370f2b6272))
+
 ## [0.15.1](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.15.0...v0.15.1) (2026-08-12)
 
 
