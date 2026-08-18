@@ -15,3 +15,6 @@
         opacity: 0;
     }
 }
+body:has(dialog.bibsonomydialog:modal) {
+  overflow: hidden; /* Prevent scrolling */
+}
