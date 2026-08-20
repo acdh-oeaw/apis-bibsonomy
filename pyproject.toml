@@ -12,6 +12,10 @@ dependencies = [
    "django-crispy-forms>=2.1",
    "httpx>=0.28.1",
 ]
+[project.urls]
+source = "https://github.com/acdh-oeaw/apis-bibsonomy"
+changelog = "https://github.com/acdh-oeaw/apis-bibsonomy/blob/main/CHANGELOG.md"
+issues = "https://github.com/acdh-oeaw/apis-bibsonomy/issues"
 
 [tool.uv]
 dev-dependencies = [
