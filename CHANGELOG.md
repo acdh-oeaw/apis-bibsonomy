@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.3](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.15.2...v0.15.3) (2026-08-20)
+
+
+### Bug Fixes
+
+* **css:** prevent scrolling of main window if dialog is open ([f1407cc](https://github.com/acdh-oeaw/apis-bibsonomy/commit/f1407ccbf9108cefc016db37a103a8a075574d9d))
+
 ## [0.15.2](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.15.1...v0.15.2) (2026-08-13)
 
 
