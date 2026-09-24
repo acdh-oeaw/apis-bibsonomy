@@ -70,7 +70,7 @@ class Reference(models.Model):
 
 
 class ZoteroEntry(models.Model):
-    url = models.URLField()
+    url = models.URLField(unique=True)
     version = models.IntegerField(null=True)
     data = models.JSONField(null=True)
 
