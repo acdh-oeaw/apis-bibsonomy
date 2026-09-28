@@ -7,6 +7,7 @@ from django.views.generic.edit import DeleteView, FormMixin, ProcessFormView, Up
 from django.urls import reverse_lazy, reverse
 from django.http import Http404
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import get_object_or_404
 
 from .models import Reference, ZoteroEntry
 from .forms import ReferenceNewForm
@@ -66,7 +67,9 @@ class ReferenceOnListView(ReferenceListView, FormMixin, ProcessFormView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["contenttype"] = self.contenttype
-        context["object"] = self.contenttype.get_object_for_this_type(id=self.pk)
+        context["object"] = get_object_or_404(
+            self.contenttype.model_class(), pk=self.pk
+        )
         if not self.request.user.is_authenticated:
             del context["form"]
         return context
