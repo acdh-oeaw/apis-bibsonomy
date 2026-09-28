@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.16.0](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.15.3...v0.16.0) (2026-09-28)
+
+
+### Features
+
+* **admin:** add ZoteroEntryAdmin ModelAdmin ([98531e3](https://github.com/acdh-oeaw/apis-bibsonomy/commit/98531e31e3f51e7451efa21130ec5e6af2d3cbb2))
+* **models:** make the URL of the zoteroentry unique ([30439a5](https://github.com/acdh-oeaw/apis-bibsonomy/commit/30439a5b52f4bffea29483407ba9d1a4b05a48e3)), closes [#235](https://github.com/acdh-oeaw/apis-bibsonomy/issues/235)
+
+
+### Bug Fixes
+
+* **management:** rename `fetch` to `fetch_zoteroentries` ([f533bce](https://github.com/acdh-oeaw/apis-bibsonomy/commit/f533bce5c867235d49b13ba97f9bb82f53808837)), closes [#236](https://github.com/acdh-oeaw/apis-bibsonomy/issues/236)
+* **views:** replace `.get_object_for_this_type` with `get_object_or_404` ([3eaab09](https://github.com/acdh-oeaw/apis-bibsonomy/commit/3eaab09ef9b814be01137b187fa4403b24de2315))
+
 ## [0.15.3](https://github.com/acdh-oeaw/apis-bibsonomy/compare/v0.15.2...v0.15.3) (2026-08-20)
 
 
